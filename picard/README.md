@@ -1,8 +1,2 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# The PICARD Front End
+The PICARD project is a collaborative effort that involves multiple teams to create a deployable application for experimenting on large data sets. Our team focused on the design of the front-end GUI. The purpose of the GUI is to provide a user-friendly interface for researchers to upload their own datasets, run an experiment, and view the results. We're using React-Vite and Tailwind CSS
