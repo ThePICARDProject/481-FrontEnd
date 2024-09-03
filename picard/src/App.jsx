@@ -1,6 +1,9 @@
 
 import './App.css'
 import * as ReactDOM from "react-dom/client";
+import SignUp from "./sign-up";
+import ForgotPassword from "./forgot-password";
+import LoginPage from "./login";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -15,14 +18,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <div>This will be the login page</div>
+    element: <LoginPage/>
   },
   {
     path: "/sign-up",
-    element: <div>This will be the sign up page</div>
+    element: <SignUp/>
   },{
     path: "/forgot-password",
-    element: <div>This will be the forgot password page</div>
+    element: <ForgotPassword/>
   },
   {
     path: "/experiment",
