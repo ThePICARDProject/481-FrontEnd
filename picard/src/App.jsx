@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
+import Experiment from './routes/experiment';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/experiment",
-    element: <div>This will be the experiment page</div>
+    element: <Experiment />
   },
 ]);
 
