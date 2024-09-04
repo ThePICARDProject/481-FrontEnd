@@ -1,6 +1,6 @@
 import React from "react";
-import pulsarBg from "./assets/pulsar_background.jpg";
-import logo from "./assets/PICARD_logo.png";
+import pulsarBg from "../assets/pulsar_background.jpg";
+import logo from "../assets/PICARD_logo.png";
 
 function ForgotPassword() {
   return (
