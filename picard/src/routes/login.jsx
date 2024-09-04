@@ -1,8 +1,9 @@
 import React from "react";
-import pulsarBg from "./assets/pulsar_background.jpg";
-import logo from "./assets/PICARD_logo.png";
+import pulsarBg from "../assets/pulsar_background.jpg";
+import logo from "../assets/PICARD_logo.png";
+import "../App.css";
 
-function SignUp() {
+function LoginPage() {
   return (
     <div className="w-screen h-screen">
       <div className="grid grid-cols-3 h-full">
@@ -48,14 +49,34 @@ function SignUp() {
                   />
                 </div>
 
-                {/* Sign Up Button */}
+                {/* Submit Button */}
                 <div className="row-span-1 flex justify-center items-center my-2">
                   <button
                     type="submit"
                     className="w-full h-12 bg-[#FFD60A] rounded-md"
                   >
-                    Sign Up
+                    Login
                   </button>
+                </div>
+
+                <div className="row-span-1 my-2">
+                  <div className="grid grid-cols-2">
+                    {/* Create Account Button */}
+                    <button
+                      type="submit"
+                      className="w-full h-12 bg-[#FFD60A] rounded-md mr-1"
+                    >
+                      Create Account
+                    </button>
+
+                    {/* Forgot Password Button */}
+                    <button
+                      type="submit"
+                      className="w-full h-12 bg-[#FFD60A] rounded-md ml-1"
+                    >
+                      Forgot Password
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -66,4 +87,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default LoginPage;
