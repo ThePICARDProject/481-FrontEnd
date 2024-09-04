@@ -1,13 +1,13 @@
 import "./App.css";
 import * as ReactDOM from "react-dom/client";
-import SignUp from "./sign-up";
-import ForgotPassword from "./forgot-password";
-import LoginPage from "./login";
+import SignUp from "./routes/sign-up";
+import ForgotPassword from "./routes/forgot-password";
+import LoginPage from "./routes/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Experiment from "./routes/experiment";
 import LandingPage from "./routes/landing_page";
-import Home from "./pages/home";
+import Home from "./routes/home";
 
 const router = createBrowserRouter([
   {
