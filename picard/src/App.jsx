@@ -7,12 +7,12 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import Experiment from './routes/experiment';
+import LandingPage from './routes/landing_page';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>This will be the landing page</div>,
-    errorElement: "This will be the error page",
+    element: <LandingPage />
   },
   {
     path: "/login",
