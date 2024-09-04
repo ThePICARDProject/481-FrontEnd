@@ -1,7 +1,8 @@
+import './Experiment.css'
 
 function Experiment() {
     return (
-        <div className="grid grid-cols-3 grid-rows-9 gap-4 h-screen p-3">
+        <div className="main grid grid-cols-3 grid-rows-9 gap-4 h-screen p-3">
             <div className="col-span-2 bg-[#ffffff]"></div>
             <div className='relative'>
                 <div className={'absolute bottom-0 bg-[#001d3d] w-full text-white rounded-3xl'}>

@@ -5,9 +5,9 @@ import ForgotPassword from "./routes/forgot-password";
 import LoginPage from "./routes/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Experiment from "./routes/experiment";
 import LandingPage from "./routes/landing_page";
 import Home from "./routes/home";
+import Experiment from "./routes/Experiment";
 
 const router = createBrowserRouter([
   {
