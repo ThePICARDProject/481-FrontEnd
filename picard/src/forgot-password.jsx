@@ -18,7 +18,7 @@ function ForgotPassword() {
           <div className="grid grid-rows-3 h-full">
             {/* PICARD Logo */}
             <div className="row-span-1 flex justify-center items-center">
-              <img src={logo} alt="PICARD Logo" className="h-30" />
+              <img src={logo} alt="PICARD Logo" className="h-20" />
             </div>
 
             {/* Sign Up Form */}
