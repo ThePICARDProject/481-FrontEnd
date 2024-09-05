@@ -1,21 +1,27 @@
 import React from 'react';
 import ExperimentCard from '../components/experimentcard/experimentcard';
-
+import { useNavigate } from "react-router-dom";
 
 function Home() {
     const experiments = [
-        { name: 'Experiment 1', link: 'http://example.com/1', state: 'Completed' },
-        { name: 'Experiment 2', link: 'http://example.com/2', state: 'Completed' },
-        { name: 'Experiment 3', link: 'http://example.com/3', state: 'Completed' },
-        { name: 'Experiment 4', link: 'http://example.com/3', state: 'Completed' },
-        { name: 'Experiment 5', link: 'http://example.com/3', state: 'Completed' },
-        { name: 'Experiment 6', link: 'http://example.com/3', state: 'Completed' },
-        { name: 'Experiment 100', link: 'http://example.com/3', state: 'Completed' },
+        { name: 'Experiment 1', link: 'http://example.com/1', state: '1' },
+        { name: 'Experiment 2', link: 'http://example.com/2', state: '2' },
+        { name: 'Experiment 3', link: 'http://example.com/3', state: '3' },
+        { name: 'Experiment 4', link: 'http://example.com/3', state: '1' },
+        { name: 'Experiment 5', link: 'http://example.com/3', state: '2' },
+        { name: 'Experiment 6', link: 'http://example.com/3', state: '3' },
+        { name: 'Experiment 100', link: 'http://example.com/3', state: '3' },
     ];
 
+    const navigate = useNavigate();
+
+    const handleEnterClick = () => {
+        navigate("/experiment");
+    };
+
     return (
-        <div className="w-screen h-screen flex justify-center items-center overflow-auto ">
-            <div className="w-3/4 h-3/4 max-h-screen border border-gray-300 p-4">
+        <div className="grid h-1/2 place-items-center">
+            <div className="max-w-full h-1/2 pr-5 border-4 rounded border-[#FFD60A] overflow-auto overflow-x-hidden">
                 {experiments.map((experiment, index) => (
                     <ExperimentCard 
                         key={index} 
@@ -25,6 +31,9 @@ function Home() {
                     />
                 ))}
             </div>
+            <button className="bg-[#001D3D] hover:bg-[#FFD60A] text-white font-bold py-2 px-4 rounded-full -mt-60" onClick={handleEnterClick}>
+                New Experiment
+            </button>
         </div>
     );
 }
