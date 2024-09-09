@@ -5,10 +5,10 @@ import ForgotPassword from "./routes/forgot-password";
 import LoginPage from "./routes/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Experiment from "./routes/experiment";
 import LandingPage from "./routes/landing_page";
-import Home from "./pages/home";
-import DataVisualization from "./pages/data_visualization";
+import Home from "./routes/home";
+import Experiment from "./routes/Experiment";
+import DataVisualization from "./routes/data_visualization";
 
 const router = createBrowserRouter([
   {
