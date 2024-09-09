@@ -1,40 +1,48 @@
-
-import './App.css'
+import "./App.css";
 import * as ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import SignUp from "./sign-up";
+import ForgotPassword from "./forgot-password";
+import LoginPage from "./login";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Experiment from './routes/Experiment';
+import Experiment from "./routes/experiment";
+import LandingPage from "./routes/landing_page";
+import Home from "./pages/home";
+import DataVisualization from "./pages/data_visualization";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>This will be the landing page</div>,
-    errorElement: "This will be the error page",
+    element: <LandingPage />,
   },
   {
     path: "/login",
-    element: <div>This will be the login page</div>
+    element: <LoginPage />,
   },
   {
     path: "/sign-up",
-    element: <div>This will be the sign up page</div>
-  },{
+    element: <SignUp />,
+  },
+  {
     path: "/forgot-password",
-    element: <div>This will be the forgot password page</div>
+    element: <ForgotPassword />,
   },
   {
     path: "/experiment",
-    element: <Experiment />
+    element: <Experiment />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+  },
+  {
+    path: "/data-visualization",
+    element: <DataVisualization />,
   },
 ]);
 
 function App() {
-  return (
-    <RouterProvider router={router} />
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
