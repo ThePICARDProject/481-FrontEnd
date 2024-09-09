@@ -5,7 +5,7 @@ import ForgotPassword from "./forgot-password";
 import LoginPage from "./login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Experiment from "./routes/experiment";
+import Experiment from "./routes/Experiment.jsx";
 import LandingPage from "./routes/landing_page";
 import Home from "./pages/home";
 import DataVisualization from "./pages/data_visualization";
