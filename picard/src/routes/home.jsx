@@ -1,6 +1,7 @@
 import React from 'react';
 import ExperimentCard from '../components/experimentcard/experimentcard';
 import { useNavigate } from "react-router-dom";
+import Header from '../components/header/header';
 
 function Home() {
     const experiments = [
@@ -20,21 +21,21 @@ function Home() {
     };
 
     return (
+        <><Header />
         <div className="grid h-1/2 place-items-center">
             <div className="max-w-full h-1/2 pr-5 border-4 rounded border-[#FFD60A] overflow-auto overflow-x-hidden">
                 {experiments.map((experiment, index) => (
-                    <ExperimentCard 
-                        key={index} 
-                        experimentName={experiment.name} 
-                        link={experiment.link} 
-                        experimentState={experiment.state}
-                    />
+                    <ExperimentCard
+                        key={index}
+                        experimentName={experiment.name}
+                        link={experiment.link}
+                        experimentState={experiment.state} />
                 ))}
             </div>
             <button className="bg-[#001D3D] hover:bg-[#FFD60A] text-white font-bold py-2 px-4 rounded-full -mt-60" onClick={handleEnterClick}>
                 New Experiment
             </button>
-        </div>
+        </div></>
     );
 }
 
