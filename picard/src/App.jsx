@@ -5,9 +5,10 @@ import ForgotPassword from "./routes/forgot-password";
 import LoginPage from "./routes/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Experiment from "./routes/experiment";
 import LandingPage from "./routes/landing_page";
 import Home from "./routes/home";
+import Experiment from "./routes/Experiment";
+import DataVisualization from "./routes/data_visualization";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home />,
+  },
+  {
+    path: "/data-visualization",
+    element: <DataVisualization />,
   },
 ]);
 
