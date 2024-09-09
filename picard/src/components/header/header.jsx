@@ -8,7 +8,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="bg-gray-900 fixed top-0 left-0 w-full p-4 z-10">
+    <nav className="bg-[#001D3D] fixed top-0 left-0 w-full p-4 z-10">
       <div className="flex justify-between items-center w-full">
         {/* Left - The PICARD text with Home and Experiments */}
         <div className="flex items-center space-x-32">

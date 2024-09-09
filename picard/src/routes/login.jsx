@@ -2,7 +2,7 @@ import React from "react";
 import pulsarBg from "../assets/pulsar_background.jpg";
 import logo from "../assets/PICARD_logo.png";
 import "../App.css";
-import "../assets/css/LandingPages.css";
+import "../assets/css/landingPages.css";
 
 function LoginPage() {
   return (
