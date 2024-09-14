@@ -2,8 +2,26 @@ import React from "react";
 import pulsarBg from "./assets/pulsar_background.jpg";
 import logo from "./assets/PICARD_logo.png";
 import "./App.css";
+import  { useAuth } from "./components/authprovider/authprovider"
+import { useNavigate } from "react-router-dom";
 
-function LoginPage() {
+const Login  = () => {
+
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    setToken("this is a test token");
+    navigate("/", { replace: true });
+  };
+
+  setTimeout(() => {
+    handleLogin();
+  }, 3 * 1000);
+
+
+
+
   return (
     <div className="w-screen h-screen">
       <div className="grid grid-cols-3 h-full">
@@ -72,6 +90,7 @@ function LoginPage() {
                     {/* Forgot Password Button */}
                     <button
                       type="submit"
+                      onClick={handleLogin()}
                       className="w-full h-12 bg-[#FFD60A] rounded-md ml-1"
                     >
                       Forgot Password
@@ -85,6 +104,6 @@ function LoginPage() {
       </div>
     </div>
   );
-}
+};
 
-export default LoginPage;
+export default Login;
