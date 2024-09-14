@@ -1,16 +1,11 @@
 import './Experiment.css';
 import Header from '../components/header/header'
 import Parameter from '../components/parameter/parameter';
-import { FileUploader } from '../components/fileuploader';
 import { useState } from "react";
+import FileUploader from '../components/fileuploader/fileuploader';
 
 
 function Experiment() {
-
-    const [fileName, setFileName] = useState("");
-    const handleFile = (file) => {
-        setFileName(file.name);
-    };
 
     const parameters = [
         { parameterType: 'number', placeholder: '160Gb'},
@@ -60,11 +55,11 @@ function Experiment() {
                 </div>
             </div>
             <div className='bg-[#001D3D] rounded-2xl text-3xl'>
-                    <button className='w-full h-full' >Run Experiment</button>
+                    <button className='w-full h-full'>Run Experiment</button>
             </div>
             <div />
             <div className='bg-[#001D3D] rounded-2xl text-3xl'>
-            <FileUploader className='w-fill h-fill' handleFile={handleFile}/>
+                <FileUploader />
             </div>
         </div></>
     )
