@@ -22,8 +22,9 @@ function Home() {
 
     return (
         <><Header />
-        <div className="grid h-1/2 place-items-center">
-            <div className="max-w-full h-1/2 pr-5 border-4 rounded border-[#FFD60A] overflow-auto overflow-x-hidden">
+        <div class="grid grid-cols-2 gap-5">
+            {/* left container */}
+            <div class="h-[50vh] w-[70vh] pr-5 border-4 rounded border-[#FFD60A] overflow-auto overflow-x-hidden">
                 {experiments.map((experiment, index) => (
                     <ExperimentCard
                         key={index}
@@ -32,10 +33,23 @@ function Home() {
                         experimentState={experiment.state} />
                 ))}
             </div>
-            <button className="bg-[#001D3D] hover:bg-[#FFD60A] text-white font-bold py-2 px-4 rounded-full -mt-60" onClick={handleEnterClick}>
+            
+            {/* right container */}
+            <div class="h-[50vh] w-[70vh] pr-5 border-4 rounded border-[#FFD60A] overflow-auto overflow-x-hidden flex flex-col items-center">
+                <p>Currently running: experiment exp (TODO)</p>
+                <p>Queue position x of n (TODO)</p>
+                <p>Resources p%: 40% (TODO)</p>
+                <div class="w-3/4 bg-gray-200 rounded-full h-2.5 flex justify-start">
+                    <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '40%' }}></div>
+                </div>
+            </div>
+
+            {/* bottom button */}
+            <button className="bg-[#001D3D] hover:bg-[#FFD60A] text-white font-bold py-2 px-4 rounded-full" onClick={handleEnterClick}>
                 New Experiment
             </button>
-        </div></>
+        </div>      
+        </>
     );
 }
 
