@@ -3,6 +3,9 @@ import pulsarBg from "../assets/pulsar_background.jpg";
 import logo from "../assets/PICARD_logo.png";
 import "../App.css";
 import "../assets/css/landingPages.css";
+import LoginButton from "../components/google/loginButton";
+import LogoutButton from "../components/google/logoutButton";
+import { gapi } from "gapi-script";
 
 function LoginPage() {
   return (
@@ -27,7 +30,7 @@ function LoginPage() {
             <div className="row-span-2 flex justify-center items-center">
               <form className="grid grid-rows-4 w-96">
                 {/* Email Field */}
-                <div className="row-span-1 my-2">
+                {/* <div className="row-span-1 my-2">
                   <label className="text-[#FFFFFF] my-2">
                     Enter your mix email address
                   </label>
@@ -36,10 +39,10 @@ function LoginPage() {
                     placeholder="Email Address"
                     className="w-full h-12 p-2 rounded-md text-center text-white placeholder:text-[#FFFFFF]"
                   />
-                </div>
+                </div> */}
 
                 {/* Password Field */}
-                <div className="row-span-1 my-2">
+                {/* <div className="row-span-1 my-2">
                   <label className="text-[#FFFFFF] my-2">
                     Enter your password
                   </label>
@@ -48,35 +51,37 @@ function LoginPage() {
                     placeholder="Password"
                     className="w-full h-12 p-2 rounded-md text-center text-white placeholder:text-[#FFFFFF]"
                   />
-                </div>
+                </div> */}
 
                 {/* Submit Button */}
                 <div className="row-span-1 flex justify-center items-center my-2">
-                  <button
+                  {/* <button
                     type="submit"
                     className="w-full h-12 bg-[#FFD60A] rounded-md"
                   >
                     Login
-                  </button>
+                  </button> */}
+                  <LoginButton />
+                  <LogoutButton />
                 </div>
 
                 <div className="row-span-1 my-2">
                   <div className="grid grid-cols-2">
                     {/* Create Account Button */}
-                    <button
+                    {/* <button
                       type="submit"
                       className="w-full h-12 bg-[#FFD60A] rounded-md mr-1"
                     >
                       Create Account
-                    </button>
+                    </button> */}
 
                     {/* Forgot Password Button */}
-                    <button
+                    {/* <button
                       type="submit"
                       className="w-full h-12 bg-[#FFD60A] rounded-md ml-1"
                     >
                       Forgot Password
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </form>
