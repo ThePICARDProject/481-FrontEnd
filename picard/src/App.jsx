@@ -9,6 +9,7 @@ import LandingPage from "./routes/landing_page";
 import Home from "./routes/home";
 import Experiment from "./routes/Experiment";
 import DataVisualization from "./routes/data_visualization";
+import AccessPage from "./routes/access-page";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/access-page",
+    element: <AccessPage />,
   },
   {
     path: "/sign-up",
