@@ -1,18 +1,12 @@
 import React from "react";
-<<<<<<<< HEAD:picard/src/routes/login.jsx
 import pulsarBg from "../assets/pulsar_background.jpg";
 import logo from "../assets/PICARD_logo.png";
 import "../App.css";
 import "../assets/css/landingPages.css";
-========
-import pulsarBg from "./assets/pulsar_background.jpg";
-import logo from "./assets/PICARD_logo.png";
-import "./App.css";
-import  { useAuth } from "./components/authprovider/authprovider"
+import { useAuth } from "../components/authprovider/authprovider";
 import { useNavigate } from "react-router-dom";
 
-const Login  = () => {
-
+const Login = () => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
 
@@ -24,10 +18,6 @@ const Login  = () => {
   setTimeout(() => {
     handleLogin();
   }, 3 * 1000);
-
-
-
->>>>>>>> Joe-Dev:picard/src/loginPage.jsx
 
   return (
     <div className="w-screen h-screen">
