@@ -9,6 +9,8 @@ import LandingPage from "./routes/landing_page";
 import Home from "./routes/home";
 import Experiment from "./routes/Experiment";
 import DataVisualization from "./routes/data_visualization";
+import AuthProvider from "./components/authprovider/authprovider";
+import Routes from "./routes";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +44,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+  );
 }
 
 export default App;
