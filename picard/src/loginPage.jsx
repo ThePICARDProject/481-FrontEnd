@@ -13,6 +13,7 @@ const Login  = () => {
   const handleLogin = () => {
     setToken("this is a test token");
     navigate("/", { replace: true });
+    //window.location.replace("http://localhost:5080/Authentication/login");
   };
 
   setTimeout(() => {
