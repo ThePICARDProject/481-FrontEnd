@@ -1,8 +1,9 @@
 import React from "react";
-import pulsarBg from "./assets/pulsar_background.jpg";
-import logo from "./assets/PICARD_logo.png";
+import pulsarBg from "../assets/pulsar_background.jpg";
+import logo from "../assets/PICARD_logo.png";
+import "../assets/css/LandingPages.css";
 
-function ForgotPassword() {
+function SignUp() {
   return (
     <div className="w-screen h-screen">
       <div className="grid grid-cols-3 h-full">
@@ -23,7 +24,7 @@ function ForgotPassword() {
 
             {/* Sign Up Form */}
             <div className="row-span-2 flex justify-center items-center">
-              <form className="grid grid-rows-3 w-96">
+              <form className="grid grid-rows-4 w-96">
                 {/* Email Field */}
                 <div className="row-span-1 my-2">
                   <label className="text-[#FFFFFF] my-2">
@@ -36,13 +37,25 @@ function ForgotPassword() {
                   />
                 </div>
 
-                {/* Password Reset Button */}
+                {/* Password Field */}
+                <div className="row-span-1 my-2">
+                  <label className="text-[#FFFFFF] my-2">
+                    Enter your password
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    className="w-full h-12 p-2 rounded-md text-center text-white placeholder:text-[#FFFFFF]"
+                  />
+                </div>
+
+                {/* Sign Up Button */}
                 <div className="row-span-1 flex justify-center items-center my-2">
                   <button
                     type="submit"
                     className="w-full h-12 bg-[#FFD60A] rounded-md"
                   >
-                    Send Reset Link
+                    Sign Up
                   </button>
                 </div>
               </form>
@@ -54,4 +67,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default SignUp;
