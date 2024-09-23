@@ -11,14 +11,8 @@ const Login  = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    setToken("this is a test token");
-    navigate("/", { replace: true });
-    //window.location.replace("http://localhost:5080/Authentication/login");
+    window.location.replace("http://localhost:5080/Authentication/login");
   };
-
-  setTimeout(() => {
-    handleLogin();
-  }, 3 * 1000);
 
 
 
