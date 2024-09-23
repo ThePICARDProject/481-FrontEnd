@@ -9,9 +9,11 @@ import LandingPage from "./routes/landing_page";
 import Home from "./routes/home";
 import Experiment from "./routes/Experiment";
 import DataVisualization from "./routes/data_visualization";
+import History from "./routes/history";
 import AuthProvider from "./components/authprovider/authprovider";
 import Routes from "./routes";
 import AccessPage from "./routes/access-page";
+
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/data-visualization",
     element: <DataVisualization />,
+  },
+  {
+    path: "/history",
+    element: <History />,
   },
 ]);
 
