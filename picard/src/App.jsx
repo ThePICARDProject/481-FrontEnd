@@ -10,6 +10,10 @@ import Home from "./routes/home";
 import Experiment from "./routes/Experiment";
 import DataVisualization from "./routes/data_visualization";
 import History from "./routes/history";
+import AuthProvider from "./components/authprovider/authprovider";
+import Routes from "./routes";
+import AccessPage from "./routes/access-page";
+
 
 const router = createBrowserRouter([
   {
@@ -19,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/access-page",
+    element: <AccessPage />,
   },
   {
     path: "/sign-up",
@@ -47,7 +55,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+  );
 }
 
 export default App;
