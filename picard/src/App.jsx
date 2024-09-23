@@ -1,4 +1,5 @@
 import AuthProvider from "./components/authprovider/authprovider";
+import Home from "./pages/home";
 import Routes from "./routes";
 
 function App() {

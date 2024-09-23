@@ -1,18 +1,9 @@
 import React from 'react';
 import ExperimentCard from '../components/experimentcard/experimentcard';
-import  { useAuth } from "../components/authprovider/authprovider"
-import { useNavigate } from "react-router-dom";
 
+import Header from '../components/header/header'
 function Home() {
 
-    const { setToken } = useAuth();
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        //swindow.location.replace("http://localhost:5080/Authentication/login");
-        setToken();
-        navigate("/", { replace: true });
-      };
 
     const experiments = [
         { name: 'Experiment 1', link: 'http://example.com/1', state: 'Completed' },
@@ -25,8 +16,8 @@ function Home() {
     ];
 
     return (
+        <><Header />
         <div className="w-screen h-screen flex justify-center items-center overflow-auto ">
-            <button onClick={handleLogout} > hello </button>
             <div className="w-3/4 h-3/4 max-h-screen border border-gray-300 p-4">
                 {experiments.map((experiment, index) => (
                     <ExperimentCard 
@@ -39,6 +30,7 @@ function Home() {
             </div>
 
         </div>
+        </>
     );
 }
 

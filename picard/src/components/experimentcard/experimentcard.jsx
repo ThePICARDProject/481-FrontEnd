@@ -3,11 +3,11 @@ import React from 'react';
 const ExperimentCard = ({ experimentName, link, experimentState }) => {
   const getExperimentState = (state) => {
     switch (state) {
-      case '3':
+      case 'Completed':
         return { message: 'Completed', color: 'text-green-500' };
-      case '2':
+      case 'In Progress':
         return { message: 'In Progress', color: 'text-yellow-500' };
-      case '1':
+      case 'Not Started':
         return { message: 'Not Started', color: 'text-red-500' };
     }
   };

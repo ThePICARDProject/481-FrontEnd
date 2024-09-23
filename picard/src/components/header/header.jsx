@@ -1,11 +1,26 @@
 import React, { useState } from "react";
-
+import  { useAuth } from "../authprovider/authprovider"
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+
+  
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
+
+    
+  const handleLogout = () => {
+    //swindow.location.replace("http://localhost:5080/Authentication/login");
+    setToken();
+    navigate("/", { replace: true });
+  };
+
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
 
   return (
     <nav className="bg-gray-900 fixed top-0 left-0 w-full p-4 z-10">
@@ -78,6 +93,7 @@ const Header = () => {
                 href="#"
                 className="block px-4 py-2 text-[#FFD60A] hover:bg-[#002b5e] hover:text-white"
                 style={{ fontFamily: "Tourney, sans-serif" }}
+                onClick={handleLogout}
               >
                 Sign out
               </a>

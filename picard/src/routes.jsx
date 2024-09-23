@@ -1,13 +1,12 @@
 import "./App.css";
-import SignUp from "./sign-up.jsx";
-import ForgotPassword from "./forgot-password.jsx";
+import SignUp from "./routes/sign-up.jsx";
 import LoginPage from "./loginPage.jsx";
 import "./index.css";
 import Experiment from "./routes/Experiment.jsx";
 import LandingPage from "./routes/landing_page.jsx";
 import Home from "./pages/home.jsx";
 import ProtectedRoute from "./components/protectedroute/protectedroute.jsx"
-import DataVisualization from "./pages/data_visualization.jsx";
+import DataVisualization from "./routes/data_visualization.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth} from "./components/authprovider/authprovider.jsx";
 import { Children } from "react";
@@ -27,10 +26,6 @@ const notAuthedRoutes = [
 {
   path: "/sign-up",
   element: <SignUp />,
-},
-{
-  path: "/forgot-password",
-  element: <ForgotPassword />,
 }];
 
 const authedRoutes = [
