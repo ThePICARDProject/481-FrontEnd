@@ -11,7 +11,9 @@ const Login  = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    window.location.replace("http://localhost:5080/Authentication/login");
+    //swindow.location.replace("http://localhost:5080/Authentication/login");
+    setToken("this is a test token");
+    navigate("/", { replace: true });
   };
 
 
@@ -67,6 +69,7 @@ const Login  = () => {
                   <button
                     type="submit"
                     className="w-full h-12 bg-[#FFD60A] rounded-md"
+                    onClick={handleLogin}
                   >
                     Login
                   </button>
@@ -85,7 +88,6 @@ const Login  = () => {
                     {/* Forgot Password Button */}
                     <button
                       type="submit"
-                      onClick={handleLogin()}
                       className="w-full h-12 bg-[#FFD60A] rounded-md ml-1"
                     >
                       Forgot Password
