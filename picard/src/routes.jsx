@@ -11,6 +11,7 @@ import DataVisualization from "../src/routes/data_visualization.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "../src/components/authprovider/authprovider";
 import { Children } from "react";
+import History from "./routes/history.jsx";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -32,6 +33,14 @@ const Routes = () => {
       path: "/forgot-password",
       element: <ForgotPassword />,
     },
+    {
+      path: "/history",
+      element: <History />
+    },
+    {
+      path: "/home",
+      element: <Home />,
+    },
   ];
 
   const authedRoutes = [
@@ -39,10 +48,10 @@ const Routes = () => {
       path: "/",
       element: <ProtectedRoute />,
       children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
+        // {
+        //   path: "/",
+        //   element: <Home />,
+        // },
         {
           path: "/experiment",
           element: <Experiment />,
