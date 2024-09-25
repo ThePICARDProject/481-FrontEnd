@@ -11,7 +11,8 @@ const Login  = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    //swindow.location.replace("http://localhost:5080/Authentication/login");
+    //window.location.replace("http://localhost:5080/Authentication/login");
+    
     setToken("this is a test token");
     navigate("/", { replace: true });
   };
@@ -67,7 +68,6 @@ const Login  = () => {
                 {/* Submit Button */}
                 <div className="row-span-1 flex justify-center items-center my-2">
                   <button
-                    type="submit"
                     className="w-full h-12 bg-[#FFD60A] rounded-md"
                     onClick={handleLogin}
                   >
