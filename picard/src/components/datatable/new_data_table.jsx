@@ -13,12 +13,12 @@ import Button from "@mui/material/Button";
 function CSVViewer() {
   const [csvData, setCsvData] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
   const [totalRows, setTotalRows] = useState(0);
   const [chunkSize] = useState(50);
   const isParsedRef = useRef(false);
 
-  const route = "/sample_data/palfa_001-test.csv";
+  const route = "/sample_data/palfa_001.csv";
 
   useEffect(() => {
     if (!isParsedRef.current) {
@@ -109,7 +109,7 @@ function CSVViewer() {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
+            rowsPerPageOptions={[15, 25, 100]}
             component="div"
             count={totalRows}
             rowsPerPage={rowsPerPage}
