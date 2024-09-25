@@ -5,10 +5,12 @@ import ForgotPassword from "./routes/forgot-password";
 import LoginPage from "./routes/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Experiment from "./routes/experiment";
+import Experiment from "./routes/Experiment";
 import LandingPage from "./routes/landing_page";
 import Home from "./pages/home";
-import DataVisualization from "./pages/data_visualization";
+import DataVisualization from "./routes/data_visualization";
+import AuthProvider from "./components/authprovider/authprovider";
+import Routes from "./routes";
 
 const router = createBrowserRouter([
   {
@@ -40,9 +42,7 @@ const router = createBrowserRouter([
     element: <DataVisualization />,
   },
 ]);
-import AuthProvider from "./components/authprovider/authprovider";
-import Home from "./pages/home";
-import Routes from "./routes";
+
 
 function App() {
   return (
