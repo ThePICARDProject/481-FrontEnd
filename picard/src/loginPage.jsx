@@ -1,10 +1,24 @@
 import React from "react";
-import pulsarBg from "../assets/pulsar_background.jpg";
-import logo from "../assets/PICARD_logo.png";
-import "../App.css";
-import "../assets/css/LandingPages.css";
+import pulsarBg from "./assets/pulsar_background.jpg";
+import logo from "./assets/PICARD_logo.png";
+import "./App.css";
+import  { useAuth } from "./components/authprovider/authprovider"
+import { useNavigate } from "react-router-dom";
 
-function LoginPage() {
+const Login  = () => {
+
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    //swindow.location.replace("http://localhost:5080/Authentication/login");
+    setToken("this is a test token");
+    navigate("/", { replace: true });
+  };
+
+
+
+
   return (
     <div className="w-screen h-screen">
       <div className="grid grid-cols-3 h-full">
@@ -55,6 +69,7 @@ function LoginPage() {
                   <button
                     type="submit"
                     className="w-full h-12 bg-[#FFD60A] rounded-md"
+                    onClick={handleLogin}
                   >
                     Login
                   </button>
@@ -86,6 +101,6 @@ function LoginPage() {
       </div>
     </div>
   );
-}
+};
 
-export default LoginPage;
+export default Login;
