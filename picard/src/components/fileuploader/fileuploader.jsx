@@ -1,5 +1,6 @@
 import React from "react";
 import Papa from "papaparse";
+import axios from "axios";
 import "./fileuploader.css";
 const FileUploader = () => {
   const handleFileChange = async (e) => {
@@ -8,7 +9,7 @@ const FileUploader = () => {
     const formData = new FormData();
     formData.append("file", file);
     const res = await axios
-      .post("http://localhost:5080/api/dataset/upload", formData, {
+      .post("http://localhost:5000/upload", formData, {
         headers: {
           headers: { "Content-Type": "multipart/form-data" },
         },
