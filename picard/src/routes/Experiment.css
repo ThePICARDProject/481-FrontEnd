@@ -3,3 +3,22 @@
     margin: 0 auto;
     text-align: center;
   }
+
+  .run-experiment-button {
+    padding: 15px 30px; /* Same padding as the upload button */
+    background-color: #001D3D; /* Blue background */
+    color: #FFD60A; /* Yellow font color */
+    font-family: 'Tourney', sans-serif; /* Use the Tourney font */
+    font-size: 1.5rem; /* Match the desired font size */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.run-experiment-button:hover {
+    background-color: #002d5c; /* Slightly lighter blue on hover */
+}
