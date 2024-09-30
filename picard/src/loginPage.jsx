@@ -4,6 +4,7 @@ import logo from "./assets/PICARD_logo.png";
 import "./App.css";
 import  { useAuth } from "./components/authprovider/authprovider"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login  = () => {
 
@@ -11,8 +12,7 @@ const Login  = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    //window.location.replace("http://localhost:5080/Authentication/login");
-    
+    window.open("http://localhost:5080/Authentication/login");
     setToken("this is a test token");
     navigate("/", { replace: true });
   };
