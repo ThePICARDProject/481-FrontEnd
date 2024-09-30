@@ -87,7 +87,6 @@ const Login = () => {
                     {/* Forgot Password Button */}
                     <button
                       type="submit"
-                      onClick={handleLogin()}
                       className="w-full h-12 bg-[#FFD60A] rounded-md ml-1"
                     >
                       Forgot Password
@@ -103,4 +102,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

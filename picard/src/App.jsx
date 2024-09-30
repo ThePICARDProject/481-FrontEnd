@@ -14,7 +14,6 @@ import AuthProvider from "./components/authprovider/authprovider";
 import Routes from "./routes";
 import AccessPage from "./routes/access-page";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
