@@ -1,13 +1,13 @@
 import './Experiment.css';
-import Header from '../components/header/header'
+import Header from '../components/header/header';
 import Parameter from '../components/parameter/parameter';
 import { useState } from "react";
 import FileUploader from '../components/fileuploader/fileuploader';
 
-
 // DatasetEntry component for individual dataset buttons
 const DatasetEntry = ({ name, isSelected, onClick }) => (
     <button
+        type="button"
         className={`dataset-entry ${isSelected ? 'selected' : ''}`}
         onClick={onClick}
     >
@@ -17,6 +17,7 @@ const DatasetEntry = ({ name, isSelected, onClick }) => (
 
 function Experiment() {
     const [selectedDataset, setSelectedDataset] = useState(null); // Track selected dataset
+    const [parameterValues, setParameterValues] = useState({}); // Track parameter values
 
     const datasets = [
         'Star Data 1',
@@ -26,22 +27,44 @@ function Experiment() {
     ];
 
     const parameters = [
-        { parameterType: 'number', placeholder: '160Gb' },
-        { parameterType: 'number', placeholder: '160Gb' },
-        { parameterType: 'number', placeholder: '160Gb' },
-        { parameterType: 'number', placeholder: '160Gb' },
-        { parameterType: 'number', placeholder: '160Gb' },
-        { parameterType: 'number', placeholder: '160Gb' },
-        { parameterType: 'number', placeholder: '160Gb' },
-        { parameterType: 'number', placeholder: '160Gb' },
+        { name: 'param1', parameterType: 'number', placeholder: '160Gb' },
+        { name: 'param2', parameterType: 'number', placeholder: '160Gb' },
+        { name: 'param3', parameterType: 'number', placeholder: '160Gb' },
+        { name: 'param4', parameterType: 'number', placeholder: '160Gb' },
+
     ];
+
+    // Handle parameter change
+    const handleParameterChange = (name, value) => {
+        setParameterValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+    };
+
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+
+        // Gather all form data into a single object
+        const formData = {
+            selectedDataset: datasets[selectedDataset],
+            parameters: parameterValues,
+        };
+
+        console.log("Form Data to be sent:", formData);
+
+        // TODO: Send the formData to the backend
+    };
 
     return (
         <>
-            <div className="mt-3 main grid grid-cols-3 grid-rows-8 gap-4 h-screen p-3">
+            {/* Wrap all elements in a form */}
+            <form onSubmit={handleSubmit} className="mt-3 main grid grid-cols-3 grid-rows-8 gap-4 h-screen p-3">
                 <Header className='col-span-2' />
                 <div className="col-span-3"></div>
 
+                {/* Virtual Machine Parameters */}
                 <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto overflow-x-hidden">
                     <div className="text-white mt-3 w-full">Virtual Machine Parameters</div>
                     {parameters.map((parameter, index) => (
@@ -49,6 +72,8 @@ function Experiment() {
                             key={index}
                             parameterTypet={parameter.parameterType}
                             placeholder={parameter.placeholder}
+                            name={parameter.name}
+                            onChange={(value) => handleParameterChange(parameter.name, value)}
                         />
                     ))}
                 </div>
@@ -70,6 +95,7 @@ function Experiment() {
                     </div>
                 </div>
 
+                {/* Algorithm Parameters */}
                 <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto">
                     <div className="text-white mt-3 w-full">Algorithm Parameters</div>
                     <div className="overflow-auto">
@@ -78,19 +104,25 @@ function Experiment() {
                                 key={index}
                                 parameterTypet={parameter.parameterType}
                                 placeholder={parameter.placeholder}
+                                name={parameter.name}
+                                onChange={(value) => handleParameterChange(parameter.name, value)}
                             />
                         ))}
                     </div>
                 </div>
 
+                {/* Run Experiment Button */}
                 <div className='bg-[#001D3D] rounded-2xl text-3xl'>
-                    <button className='w-full h-full run-experiment-button'>Run Experiment</button>
+                    <button type="submit" className='w-full h-full run-experiment-button'>
+                        Run Experiment
+                    </button>
                 </div>
-                <div />
-                <div className='bg-[#001D3D] rounded-2xl text-3xl p-0 m-0 h-full'>
+
+                {/* Upload Data Set Button */}
+                <div className='bg-[#001D3D] rounded-2xl text-3xl p-0 m-0 h-full col-span-2'>
                     <FileUploader />
                 </div>
-            </div>
+            </form>
         </>
     );
 }
