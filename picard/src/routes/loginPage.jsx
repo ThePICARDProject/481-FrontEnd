@@ -5,13 +5,14 @@ import "../App.css";
 import "../assets/css/landingPages.css";
 import { useAuth } from "../components/authprovider/authprovider";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    //swindow.location.replace("http://localhost:5080/Authentication/login");
+    window.open("http://localhost:5080/Authentication/login");
     setToken("this is a test token");
     navigate("/", { replace: true });
   };
@@ -64,7 +65,6 @@ const Login = () => {
                 {/* Submit Button */}
                 <div className="row-span-1 flex justify-center items-center my-2">
                   <button
-                    type="submit"
                     className="w-full h-12 bg-[#FFD60A] rounded-md"
                     onClick={handleLogin}
                   >

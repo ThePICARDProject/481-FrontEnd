@@ -1,28 +1,32 @@
-import React from 'react';
+import React from "react";
 import Papa from "papaparse";
-import './fileuploader.css';
+import "./fileuploader.css";
 const FileUploader = () => {
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        Papa.parse(file, {
-            complete: (res) => {
-                console.log(res.data);
-            }
-        });
-    };
-
-    return (
-        <form style={{ margin: 0, padding: 0, width: '100%' }}>
-            <label className="upload-button">
-                Upload Data Set File
-                <input 
-                    type="file" 
-                    onChange={handleFileChange} 
-                    className="hidden-file-input"
-                />
-            </label>
-        </form>
-    );
+  const handleFileChange = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await axios
+      .post("http://localhost:5080/api/dataset/upload", formData, {
+        headers: {
+          headers: { "Content-Type": "multipart/form-data" },
+        },
+      })
+      .then((res) => console.log(res));
+  };
+  return (
+    <form style={{ margin: 0, padding: 0, width: "100%" }}>
+      <label className="upload-button">
+        Upload Data Set File
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="hidden-file-input"
+        />
+      </label>
+    </form>
+  );
 };
 
 export default FileUploader;
