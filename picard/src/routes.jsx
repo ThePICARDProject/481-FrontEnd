@@ -33,14 +33,6 @@ const Routes = () => {
       path: "/forgot-password",
       element: <ForgotPassword />,
     },
-    {
-      path: "/history",
-      element: <History />
-    },
-    {
-      path: "/home",
-      element: <Home />,
-    },
   ];
 
   const authedRoutes = [
@@ -48,10 +40,14 @@ const Routes = () => {
       path: "/",
       element: <ProtectedRoute />,
       children: [
-        // {
-        //   path: "/",
-        //   element: <Home />,
-        // },
+        {
+          path: "/home",
+          element: <Home />,
+        },
+        {
+          path: "/history",
+          element: <History />,
+        },
         {
           path: "/experiment",
           element: <Experiment />,
@@ -65,8 +61,8 @@ const Routes = () => {
   ];
 
   const router = createBrowserRouter([
-    ...(!token ? notAuthedRoutes : []),
-    ...authedRoutes,
+    ...(!token ? authedRoutes : []),
+    ...notAuthedRoutes,
   ]);
 
   return <RouterProvider router={router}></RouterProvider>;
