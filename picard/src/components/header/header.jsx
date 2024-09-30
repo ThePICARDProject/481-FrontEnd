@@ -34,7 +34,7 @@ const Header = () => {
             className="flex space-x-32 text-lg"
             style={{ fontFamily: "Tourney, sans-serif", color: "#FFD60A" }}
           >
-            <a href="/home" className="hover:text-blue-700">
+            <a href="/" className="hover:text-blue-700">
               Home
             </a>
             <a href="/experiment" className="hover:text-blue-700">

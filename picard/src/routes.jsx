@@ -10,7 +10,6 @@ import ProtectedRoute from "../src/components/protectedroute/protectedroute.jsx"
 import DataVisualization from "../src/routes/data_visualization.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "../src/components/authprovider/authprovider";
-import { Children } from "react";
 import History from "./routes/history.jsx";
 
 const Routes = () => {
@@ -41,7 +40,7 @@ const Routes = () => {
       element: <ProtectedRoute />,
       children: [
         {
-          path: "/home",
+          path: "/",
           element: <Home />,
         },
         {
@@ -61,8 +60,8 @@ const Routes = () => {
   ];
 
   const router = createBrowserRouter([
-    ...(!token ? authedRoutes : []),
-    ...notAuthedRoutes,
+    ...(!token ? notAuthedRoutes : []),
+    ...authedRoutes,
   ]);
 
   return <RouterProvider router={router}></RouterProvider>;
