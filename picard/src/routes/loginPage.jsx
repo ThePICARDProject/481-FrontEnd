@@ -12,9 +12,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    // window.open("http://localhost:5080/Authentication/login");
-    setToken("this is a test token");
-    navigate("/", { replace: true });
+    window.open("http://localhost:5080/Authentication/login");
+    setToken("test")
+    navigate("/", {replace: true})
   };
 
   return (

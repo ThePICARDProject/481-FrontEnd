@@ -9,12 +9,11 @@ const FileUploader = () => {
     const formData = new FormData();
     formData.append("file", file);
     const res = await axios
-      .post("http://localhost:5000/upload", formData, {
+      .post("http://localhost:5080/api/dataset/upload", formData, {
         headers: {
           headers: { "Content-Type": "multipart/form-data" },
         },
-      })
-      .then((res) => console.log(res));
+      });
   };
   return (
     <form style={{ margin: 0, padding: 0, width: "100%" }}>

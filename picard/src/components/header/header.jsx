@@ -6,7 +6,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    //swindow.location.replace("http://localhost:5080/Authentication/login");
+    window.location.replace("http://localhost:5080/Authentication/logout", -self);
     setToken();
     navigate("/", { replace: true });
   };

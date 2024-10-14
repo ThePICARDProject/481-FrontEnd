@@ -11,6 +11,7 @@ import DataVisualization from "../src/routes/data_visualization.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "../src/components/authprovider/authprovider";
 import History from "./routes/history.jsx";
+import LoginStep from "./routes/login.jsx";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -32,6 +33,10 @@ const Routes = () => {
       path: "/forgot-password",
       element: <ForgotPassword />,
     },
+    {
+      path: "/loginStep",
+      element: <LoginStep />
+    }
   ];
 
   const authedRoutes = [
