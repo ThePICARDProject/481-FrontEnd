@@ -19,7 +19,7 @@ const FileUploader = () => {
   return (
     <form style={{ margin: 0, padding: 0, width: "100%" }}>
       <label className="upload-button">
-        Upload Data Set File
+        Upload Data Set or Driver Package
         <input
           type="file"
           onChange={handleFileChange}
