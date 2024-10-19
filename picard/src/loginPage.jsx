@@ -2,23 +2,22 @@ import React from "react";
 import pulsarBg from "./assets/pulsar_background.jpg";
 import logo from "./assets/PICARD_logo.png";
 import "./App.css";
-import  { useAuth } from "./components/authprovider/authprovider"
+import { useAuth } from "./components/authprovider/authprovider";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login  = () => {
-
+const Login = () => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    window.open("http://localhost:5080/Authentication/login");
-    setToken("this is a test token");
+    window.open(
+      "http://localhost:5080/authentication/login?returnUrl=http://localhost:5173/",
+      "_self"
+    );
+    setToken("14f26f3a-fe87-4d1f-a2d1-eac4bd1ef673");
     navigate("/", { replace: true });
   };
-
-
-
 
   return (
     <div className="w-screen h-screen">

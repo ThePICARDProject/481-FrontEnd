@@ -1,26 +1,22 @@
 import React, { useState } from "react";
-import  { useAuth } from "../authprovider/authprovider"
+import { useAuth } from "../authprovider/authprovider";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
-
-  
   const { setToken } = useAuth();
   const navigate = useNavigate();
 
-    
   const handleLogout = () => {
-    //swindow.location.replace("http://localhost:5080/Authentication/login");
     setToken();
-    navigate("/", { replace: true });
+    window.location.replace(
+      "http://localhost:5080/Authentication/logout?returnUrl=http://localhost:5173/"
+    );
   };
-
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
-
 
   return (
     <nav className="bg-gray-900 fixed top-0 left-0 w-full p-4 z-10">
