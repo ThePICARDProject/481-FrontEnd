@@ -10,9 +10,7 @@ const FileUploader = () => {
     formData.append("file", file);
     const res = await axios
       .post("http://localhost:5080/api/dataset/upload", formData, {
-        headers: {
           headers: { "Content-Type": "multipart/form-data" },
-        },
       });
   };
   return (

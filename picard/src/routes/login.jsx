@@ -9,7 +9,7 @@ const LoginStep = () => {
 
   const handleLogin = () => {
     axios.get("http://localhost:5080/User/userinfo").then(res => {
-        
+      console.log()
     }).catch(err => console.log(err))
     setToken("test")
         navigate("/", { replace: true });
