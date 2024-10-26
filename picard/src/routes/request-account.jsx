@@ -37,25 +37,13 @@ function SignUp() {
                   />
                 </div>
 
-                {/* Password Field */}
-                <div className="row-span-1 my-2">
-                  <label className="text-[#FFFFFF] my-2">
-                    Enter your password
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    className="w-full h-12 p-2 rounded-md text-center text-white placeholder:text-[#FFFFFF]"
-                  />
-                </div>
-
                 {/* Sign Up Button */}
                 <div className="row-span-1 flex justify-center items-center my-2">
                   <button
                     type="submit"
                     className="w-full h-12 bg-[#FFD60A] rounded-md"
                   >
-                    Sign Up
+                    Request Access
                   </button>
                 </div>
               </form>
