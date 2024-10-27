@@ -3,6 +3,8 @@ import Header from '../components/header/header';
 import Parameter from '../components/parameter/parameter';
 import { useState } from "react";
 import FileUploader from '../components/fileuploader/fileuploader';
+import Jsonify from '../components/formDataUtility/jsonify.jsx';
+
 
 // DatasetEntry component for individual dataset buttons
 const DatasetEntry = ({ name, isSelected, onClick }) => (
@@ -83,20 +85,34 @@ function Experiment() {
             setNewParameterValue('');
         }
     };
-    
+
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent default form submission behavior
-        // Gather all form data into a single object
-        const formData = {
+
+        // Gather all form data into the JSON structure
+        const jsonData = Jsonify({
             selectedDataset: selectedDataset !== null ? datasets[selectedDataset] : null,
             selectedPackage: selectedPackage !== null ? packages[selectedPackage] : null,
-            parameters: parameterValues,
-            additionalParameters,
-        };
-        // TODO make a JSON-ify for formdata
-        console.log("Form Data to be sent:", formData);
-        // TODO: Send the formData to the backend
+            parameterValues,
+            additionalParameters
+        });
+
+        // Send the jsonData to the backend (example with fetch or axios)
+        fetch('http://localhost:5080/api/your-endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
 
     return (
@@ -105,7 +121,7 @@ function Experiment() {
             <form onSubmit={handleSubmit} className="mt-3 main grid grid-cols-3 grid-rows-8 gap-4 h-screen p-3">
                 <Header className='col-span-2' />
                 <div className="col-span-3"></div>
-                
+
                 {/* Cluster Parameters */}
                 <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto overflow-x-hidden">
                     <div className="text-white mt-3 w-full">Cluster Parameters</div>
@@ -127,14 +143,14 @@ function Experiment() {
                 <div className="col-span-2 bg-[#001D3D] row-span-6 rounded-2xl p-5">
                     <div className='w-full h-full rounded-2xl'>
                         <h1 className='underline text-5xl'>
-                            <span 
+                            <span
                                 className={`cursor-pointer ${mode === 'datasets' ? 'text-yellow-500' : ''}`}
                                 onClick={() => setMode('datasets')}
                             >
                                 Current Data Sets
                             </span>
                             {' / '}
-                            <span 
+                            <span
                                 className={`cursor-pointer ${mode === 'packages' ? 'text-yellow-500' : ''}`}
                                 onClick={() => setMode('packages')}
                             >
@@ -184,32 +200,32 @@ function Experiment() {
                     {additionalParameters.map((param, index) => (
                         <div key={index} className="flex items-center mt-2">
                             <label className="text-white w-1/4 pl-4">{param.name}:</label>
-                            <input 
-                                type="text" 
-                                value={param.value} 
-                                readOnly 
-                                className="rounded-3xl m-4 flex-grow text-white bg-[#001D3D]" 
+                            <input
+                                type="text"
+                                value={param.value}
+                                readOnly
+                                className="rounded-3xl m-4 flex-grow text-white bg-[#001D3D]"
                             />
                         </div>
                     ))}
                     <div className="flex items-center mt-2">
-                        <input 
-                            type="text" 
-                            placeholder="Parameter Name" 
-                            value={newParameterName} 
-                            onChange={(e) => setNewParameterName(e.target.value)} 
-                            className="rounded-3xl m-4 flex-grow text-black bg-white" 
+                        <input
+                            type="text"
+                            placeholder="Parameter Name"
+                            value={newParameterName}
+                            onChange={(e) => setNewParameterName(e.target.value)}
+                            className="rounded-3xl m-4 flex-grow text-black bg-white"
                         />
-                        <input 
-                            type="text" 
-                            placeholder="Parameter Value" 
-                            value={newParameterValue} 
-                            onChange={(e) => setNewParameterValue(e.target.value)} 
-                            className="rounded-3xl m-4 flex-grow text-black bg-white" 
+                        <input
+                            type="text"
+                            placeholder="Parameter Value"
+                            value={newParameterValue}
+                            onChange={(e) => setNewParameterValue(e.target.value)}
+                            className="rounded-3xl m-4 flex-grow text-black bg-white"
                         />
-                        <button 
-                            type="button" 
-                            onClick={addAdditionalParameter} 
+                        <button
+                            type="button"
+                            onClick={addAdditionalParameter}
                             className="rounded-3xl bg-blue-500 text-white p-2"
                         >
                             Add Parameter
