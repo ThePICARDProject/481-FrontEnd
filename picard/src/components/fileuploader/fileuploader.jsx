@@ -1,8 +1,5 @@
 import React from "react";
-import { useState } from "react";
 import axios from "axios";
-import Papa from "papaparse";
-import { useAuth } from "../authprovider/authprovider";
 const FileUploader = () => {
   const handleFileChange = async (e) => {
     e.preventDefault();
@@ -21,7 +18,7 @@ const FileUploader = () => {
         formData,
         {
           headers: {
-            "ChunkNumber": start,
+            "ChunkNumber": start + 1,
             "TotalChunks": total,
             "Content-Type": "multipart/form-data",
           },
