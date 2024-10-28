@@ -1,50 +1,36 @@
-// TODO make the form json poops!
-import React from "react";
-
-// Function to handle JSON-ifying the form data
 const Jsonify = ({
     selectedDataset,
     selectedPackage,
     parameterValues,
-    additionalParameters
+    additionalParameters,
+    clusterParameters
 }) => {
-    // JSON structure for the required arguments
-    const requiredArgs = {
+    const experiment_parameters = {
         classname: parameterValues["Class Name"] || "",
         jarname: parameterValues["Jar Name"] || "",
         dataset: selectedDataset || "",
         hdfsOutput: parameterValues["HDFS Output File"] || ""
     };
 
-    // JSON structure for algorithm parameters
-    const algorithmParams = {
-        nodeCount: parameterValues["Node Count"] || "",
-        driverMemory: parameterValues["Driver Memory"] || "",
-        driverCores: parameterValues["Driver Cores"] || "",
-        executorNum: parameterValues["Executor Number"] || "",
-        executorCores: parameterValues["Executor Cores"] || "",
-        executorMemory: parameterValues["Executor Memory"] || "",
-        memoryOverhead: parameterValues["Memory Overhead"] || ""
-    };
+    const clusterParams = clusterParameters.reduce((acc, param) => {
+        acc[param.name] = param.value;
+        return acc;
+    }, {});
 
-    // JSON structure for additional arguments
     const additionalArgs = additionalParameters.map((param, index) => ({
         argName: param.name,
         value: param.value,
-        index: index + 1 // Adjusting index if needed for order
+        index: index + 1
     }));
 
-    // Final JSON object
     const jsonObject = {
-        requiredArgs,
-        algorithmParams,
+        experiment_parameters,
+        clusterParams,
         additionalArgs
     };
 
-    // Log to check JSON structure
     console.log("JSON Object to send:", jsonObject);
-
-    return jsonObject; 
+    return jsonObject;
 };
 
 export default Jsonify;
