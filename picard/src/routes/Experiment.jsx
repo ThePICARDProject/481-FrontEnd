@@ -3,9 +3,10 @@ import Header from "../components/header/header";
 import Parameter from "../components/parameter/parameter";
 import { useState } from "react";
 import FileUploader from "../components/fileuploader/fileuploader";
-// import ExperimentDefault from '../components/experiment_defaults/experiment_default';
 import ClusterParameters from "../components/cluster_parameters/clusterparameters";
 import { useEffect } from "react";
+import Jsonify from '../components/formDataUtility/jsonify.jsx';
+
 
 // DatasetEntry component for individual dataset buttons
 const DatasetEntry = ({ name, isSelected, onClick }) => (
@@ -84,41 +85,46 @@ function Experiment() {
     }));
   };
 
-  const addAdditionalParameter = () => {
-    if (newParameterName && newParameterValue) {
-      setAdditionalParameters([
-        ...additionalParameters,
-        { name: newParameterName, value: newParameterValue },
-      ]);
-      setNewParameterName("");
-      setNewParameterValue("");
-    }
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    // Gather all form data into a single object
-
-    console.log("clusterParameters:", clusterParameters);
-
-    const clusterParams = clusterParameters.reduce((acc, param) => {
-      acc[param.name] = param.value;
-      return acc;
-    }, {});
-
-    const formData = {
-      selectedDataset:
-        selectedDataset !== null ? datasets[selectedDataset] : null,
-      selectedPackage:
-        selectedPackage !== null ? packages[selectedPackage] : null,
-      parameters: { ...parameterValues, clusterParams },
-      additionalParameters,
+    const addAdditionalParameter = () => {
+        if (newParameterName && newParameterValue) {
+            setAdditionalParameters([...additionalParameters, { name: newParameterName, value: newParameterValue }]);
+            setNewParameterName('');
+            setNewParameterValue('');
+        }
     };
-    // TODO make a JSON-ify for formdata
-    console.log("Form Data to be sent:", formData);
-    // TODO: Send the formData to the backend
-  };
+    
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+        // Gather all form data into a single object
+        const clusterParams = clusterParameters.reduce((acc, param) => {
+          acc[param.name] = param.value;
+          return acc;
+        }, {});
+        const formData = {
+          selectedDataset:
+            selectedDataset !== null ? datasets[selectedDataset] : null,
+          selectedPackage:
+            selectedPackage !== null ? packages[selectedPackage] : null,
+          parameters: { ...parameterValues, clusterParams },
+          additionalParameters,
+        };
+        // Send the jsonData to the backend (example with fetch or axios)
+        fetch('http://localhost:5080/api/your-endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    };
 
   return (
     <>
