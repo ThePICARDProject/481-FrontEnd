@@ -16,6 +16,10 @@ const Login = () => {
     window.location.href = "http://localhost:5080/Authentication/login";
   };
 
+  const requestAccount = () => {
+    navigate("/request-account");
+  };
+
   return (
     <div className="w-screen h-screen">
       <div className="grid grid-cols-3 h-full">
@@ -34,13 +38,20 @@ const Login = () => {
               <img src={logo} alt="PICARD Logo" className="h-20" />
             </div>
 
-            {/* Account Request Form */}
-            <div className="row-span-1 flex items-center">
+            {/* Login Buttons */}
+            <div className="row-span-1 flex flex-col gap-5 items-center my-20">
               <button
-                className="w-full h-12 bg-[#FFD60A] rounded-md"
+                className="w-full h-12 bg-[#FFD60A] rounded-md font-bold"
                 onClick={handleLogin}
               >
                 Login with Mix Account
+              </button>
+
+              <button
+                className="w-full h-12 bg-[#FFD60A] rounded-md font-bold"
+                onClick={requestAccount}
+              >
+                Request Access
               </button>
             </div>
 

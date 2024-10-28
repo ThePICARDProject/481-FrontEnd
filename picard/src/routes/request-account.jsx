@@ -2,8 +2,16 @@ import React from "react";
 import pulsarBg from "../assets/pulsar_background.jpg";
 import logo from "../assets/PICARD_logo.png";
 import "../assets/css/landingPages.css";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function SignUp() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const routeHome = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="w-screen h-screen">
       <div className="grid grid-cols-3 h-full">
@@ -42,6 +50,7 @@ function SignUp() {
                   <button
                     type="submit"
                     className="w-full h-12 bg-[#FFD60A] rounded-md"
+                    onClick={routeHome}
                   >
                     Request Access
                   </button>

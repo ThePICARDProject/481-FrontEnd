@@ -8,21 +8,35 @@ const FileUploader = () => {
     e.preventDefault();
     const file = e.target.files[0];
     const formData = new FormData();
-    formData.append("file", file);
-    const res = await axios
-      .post("http://localhost:5080/api/dataset/upload", formData, {
-        headers: {
-          headers: { "Content-Type": "multipart/form-data" },
-        },
-      })
-      .then((res) => console.log(res));
+    const chunkSize = 1024 * 1024;
+    let start = 0;
+    let total = Math.ceil(file.size / chunkSize);
+    while (start < file.size) {
+      const formData = new FormData();
+      formData.append("file", file.slice(start, start + chunkSize));
+      formData.append("name", file.name);
+      formData.append("description", "test");
+      const res = await axios.post(
+        "http://localhost:5080/api/dataset/upload",
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            ChunkNumber: start,
+            UploadId: "test",
+            TotalChunks: total,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      start += chunkSize;
+    }
   };
   return (
-    <div>
-      <form>
-        <input onChange={handleFileChange} type="file" />
-      </form>
-    </div>
+    <form>
+      <input type="file" onChange={handleFileChange} />
+    </form>
   );
 };
 
