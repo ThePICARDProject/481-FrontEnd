@@ -11,12 +11,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    window.open(
-      "http://localhost:5080/authentication/login?returnUrl=http://localhost:5173/",
-      "_self"
-    );
     setToken("14f26f3a-fe87-4d1f-a2d1-eac4bd1ef673");
-    navigate("/", { replace: true });
+    window.open("http://localhost:5080/Authentication/login", "_self");
   };
 
   return (

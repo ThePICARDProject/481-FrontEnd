@@ -8,7 +8,8 @@ const Header = () => {
   const handleLogout = () => {
     setToken();
     window.location.replace(
-      "http://localhost:5080/Authentication/logout?returnUrl=http://localhost:5173/"
+      "http://localhost:5080/Authentication/logout",
+      "_self"
     );
   };
 
