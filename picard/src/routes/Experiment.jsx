@@ -101,14 +101,14 @@ function Experiment() {
           acc[param.name] = param.value;
           return acc;
         }, {});
-        const formData = {
-          selectedDataset:
-            selectedDataset !== null ? datasets[selectedDataset] : null,
-          selectedPackage:
-            selectedPackage !== null ? packages[selectedPackage] : null,
-          parameters: { ...parameterValues, clusterParams },
-          additionalParameters,
-        };
+        console.log(clusterParams)
+
+        const jsonData = Jsonify({
+          selectedDataset: selectedDataset !== null ? datasets[selectedDataset] : null,
+          selectedPackage: selectedPackage !== null ? packages[selectedPackage] : null,
+          parameterValues,
+          additionalParameters
+      });
         // Send the jsonData to the backend (example with fetch or axios)
         fetch('http://localhost:5080/api/your-endpoint', {
             method: 'POST',
