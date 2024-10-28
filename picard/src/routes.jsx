@@ -8,6 +8,7 @@ import LandingPage from "./routes/landing_page.jsx";
 import Home from "./pages/home.jsx";
 import ProtectedRoute from "./components/protectedroute/protectedroute.jsx";
 import DataVisualization from "./routes/data_visualization.jsx";
+import QueuePage from "./routes/processing_page.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "./components/authprovider/authprovider.jsx";
 import { Children } from "react";
@@ -50,6 +51,10 @@ const Routes = () => {
         {
           path: "/visualization",
           element: <DataVisualization />,
+        },
+        {
+          path: "/queue",
+          element: <QueuePage />,
         },
       ],
     },

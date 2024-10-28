@@ -1,26 +1,21 @@
 import React, { useState } from "react";
-import  { useAuth } from "../authprovider/authprovider"
+import { useAuth } from "../authprovider/authprovider";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
-
-  
   const { setToken } = useAuth();
   const navigate = useNavigate();
 
-    
   const handleLogout = () => {
     //swindow.location.replace("http://localhost:5080/Authentication/login");
     setToken();
     navigate("/", { replace: true });
   };
 
-
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
-
 
   return (
     <nav className="bg-gray-900 fixed top-0 left-0 w-full p-4 z-10">
@@ -39,11 +34,12 @@ const Header = () => {
             className="flex space-x-32 text-lg"
             style={{ fontFamily: "Tourney, sans-serif", color: "#FFD60A" }}
           >
-            <a href="/home" className="hover:text-blue-700">
+            <a
+              href="/home"
+              className="hover:text-blue-700"
+              style={{ fontSize: "25px" }}
+            >
               Home
-            </a>
-            <a href="/experiment" className="hover:text-blue-700">
-              Experiments
             </a>
           </div>
         </div>
@@ -68,7 +64,7 @@ const Header = () => {
                 d="M4 6h16M4 12h16m-7 6h7"
               ></path>
             </svg>
-            <span>Menu</span>{" "}
+            <span style={{ fontSize: "20px" }}>Menu</span>{" "}
             {/* Optional text to make the button match better */}
           </button>
 
@@ -78,21 +74,21 @@ const Header = () => {
               <a
                 href="#"
                 className="block px-4 py-2 text-[#FFD60A] hover:bg-[#002b5e] hover:text-white"
-                style={{ fontFamily: "Tourney, sans-serif" }}
+                style={{ fontFamily: "Tourney, sans-serif", fontSize: "20px" }}
               >
                 Profile
               </a>
               <a
                 href="#"
                 className="block px-4 py-2 text-[#FFD60A] hover:bg-[#002b5e] hover:text-white"
-                style={{ fontFamily: "Tourney, sans-serif" }}
+                style={{ fontFamily: "Tourney, sans-serif", fontSize: "20px" }}
               >
                 Settings
               </a>
               <a
                 href="#"
                 className="block px-4 py-2 text-[#FFD60A] hover:bg-[#002b5e] hover:text-white"
-                style={{ fontFamily: "Tourney, sans-serif" }}
+                style={{ fontFamily: "Tourney, sans-serif", fontSize: "20px" }}
                 onClick={handleLogout}
               >
                 Sign out

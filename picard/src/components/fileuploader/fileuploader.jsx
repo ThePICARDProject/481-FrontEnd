@@ -18,9 +18,11 @@ const FileUploader = () => {
       .then((res) => console.log(res));
   };
   return (
-    <form>
-      <input onChange={handleFileChange} type="file" />
-    </form>
+    <div>
+      <form>
+        <input onChange={handleFileChange} type="file" />
+      </form>
+    </div>
   );
 };
 
