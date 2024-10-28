@@ -1,8 +1,9 @@
 import React from "react";
-import pulsarBg from "./assets/pulsar_background.jpg";
-import logo from "./assets/PICARD_logo.png";
-import "./App.css";
-import { useAuth } from "./components/authprovider/authprovider";
+import pulsarBg from "../assets/pulsar_background.jpg";
+import logo from "../assets/PICARD_logo.png";
+import "../App.css";
+import "../assets/css/landingPages.css";
+import { useAuth } from "../components/authprovider/authprovider";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -11,8 +12,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    setToken("14f26f3a-fe87-4d1f-a2d1-eac4bd1ef673");
-    window.open("http://localhost:5080/Authentication/login", "_self");
+    window.open("http://localhost:5080/Authentication/login");
+    setToken("test")
+    navigate("/", {replace: true})
   };
 
   return (

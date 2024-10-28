@@ -6,6 +6,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    window.location.replace("http://localhost:5080/Authentication/logout", -self);
     setToken();
     window.location.replace(
       "http://localhost:5080/Authentication/logout",
@@ -20,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="bg-gray-900 fixed top-0 left-0 w-full p-4 z-10">
+    <nav className="bg-[#001D3D]  fixed top-0 left-0 w-full p-4 z-10">
       <div className="flex justify-between items-center w-full">
         {/* Left - The PICARD text with Home and Experiments */}
         <div className="flex items-center space-x-32">
@@ -36,11 +37,14 @@ const Header = () => {
             className="flex space-x-32 text-lg"
             style={{ fontFamily: "Tourney, sans-serif", color: "#FFD60A" }}
           >
-            <a href="/home" className="hover:text-blue-700">
+            <a href="/" className="hover:text-blue-700">
               Home
             </a>
             <a href="/experiment" className="hover:text-blue-700">
               Experiments
+            </a>
+            <a href="/history" className="hover:text-blue-700">
+              History
             </a>
           </div>
         </div>

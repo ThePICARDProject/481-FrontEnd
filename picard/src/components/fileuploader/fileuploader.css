@@ -1,0 +1,29 @@
+.upload-button {
+    display: inline-block;
+    padding: 20px 30px;
+    margin: 0;
+    background-color: #001D3D;
+    color: #FFD60A;
+    font-family: 'Tourney', sans-serif;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+    background-color: #002d5c;
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
