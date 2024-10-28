@@ -87,8 +87,17 @@ function CSVViewer({ experimentId }) {
 
       {/* Table Div */}
       {csvData.length > 0 && (
-        <Paper sx={{ width: 1200, overflow: "hidden", borderRadius: "10px" }}>
-          <TableContainer sx={{ height: 400, overflowX: "auto" }}>
+        <Paper
+          sx={{
+            width: 1200,
+            overflow: "hidden",
+            borderRadius: "10px",
+            scrollbarWidth: "none",
+          }}
+        >
+          <TableContainer
+            sx={{ height: 400, overflowX: "auto", scrollbarWidth: "none" }}
+          >
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>

@@ -10,10 +10,6 @@ const DataVisualization = () => {
   const queryParams = new URLSearchParams(search);
   const experimentId = queryParams.get("experimentId");
 
-  if (experimentId === "1") {
-    console.log("Experiment 1");
-  }
-
   return (
     <div className="w-screen min-h-screen">
       {/* Navbar */}
