@@ -1,3 +1,4 @@
+
 const Jsonify = ({
     selectedDataset,
     selectedPackage,
@@ -9,6 +10,7 @@ const Jsonify = ({
         classname: parameterValues["Class Name"] || "",
         jarname: parameterValues["Jar Name"] || "",
         dataset: selectedDataset || "",
+        package: selectedPackage || "",
         hdfsOutput: parameterValues["HDFS Output File"] || ""
     };
 

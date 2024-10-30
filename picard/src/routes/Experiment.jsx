@@ -81,7 +81,7 @@ function Experiment() {
     const handleParameterChange = (name, value) => {
         setParameterValues((prevValues) => ({
             ...prevValues,
-            [name]: prevValues,
+            [name]: value,
         }));
     };
 
