@@ -10,6 +10,7 @@ import { Button } from "@mui/material";
 import ClusterParameters from "../components/cluster_parameters/clusterparameters";
 import { useEffect } from "react";
 import Jsonify from "../components/formDataUtility/jsonify.jsx";
+import axios from "axios";
 
 // DatasetEntry component for individual dataset buttons
 const DatasetEntry = ({ name, isSelected, onClick }) => (
@@ -115,13 +116,13 @@ function Experiment() {
     });
 
     // Send the jsonData to the backend
-    fetch("http://localhost:5080/api/your-endpoint", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(jsonData),
-    })
+    axios
+      .post("http://localhost:5080/api/experiment/submit", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      })
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
