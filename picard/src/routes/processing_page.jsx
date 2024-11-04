@@ -11,7 +11,7 @@ function ProcessPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setPosition((prev) => prev - 1);
-    }, 20000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);

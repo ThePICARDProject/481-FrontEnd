@@ -128,7 +128,8 @@ function Experiment() {
               </label>{" "}
               <input
                 className="w-80 rounded h-8 p-2"
-                placeholder="Format: 1-10"
+                placeholder="1"
+                disabled
               />
             </div>
 
@@ -138,7 +139,8 @@ function Experiment() {
               </label>
               <input
                 className="w-80 rounded h-8 p-2"
-                placeholder="Format: 2048m"
+                placeholder="2048m"
+                disabled
               />
             </div>
 
@@ -148,7 +150,8 @@ function Experiment() {
               </label>
               <input
                 className="w-80 rounded h-8 p-2"
-                placeholder="Format: 1-10"
+                placeholder="1"
+                disabled
               />
             </div>
 
@@ -158,7 +161,8 @@ function Experiment() {
               </label>
               <input
                 className="w-80 rounded h-8 p-2"
-                placeholder="Format: 1-10"
+                placeholder="1"
+                disabled
               />
             </div>
 
@@ -168,7 +172,8 @@ function Experiment() {
               </label>
               <input
                 className="w-80 rounded h-8 p-2"
-                placeholder="Format: 1-10"
+                placeholder="1"
+                disabled
               />
             </div>
 
@@ -178,7 +183,8 @@ function Experiment() {
               </label>
               <input
                 className="w-80 rounded h-8 p-2"
-                placeholder="Format: 2048m"
+                placeholder="2048m"
+                disabled
               />
             </div>
 
@@ -188,7 +194,8 @@ function Experiment() {
               </label>
               <input
                 className="w-80 rounded h-8 p-2"
-                placeholder="Format: 1-10"
+                placeholder="1"
+                disabled
               />
             </div>
           </div>
@@ -250,41 +257,41 @@ function Experiment() {
               <div className="flex items-center mt-2">
                 {" "}
                 <label className="text-white mr-2" style={{ width: "150px" }}>
-                  Node Count
+                  Class Name
                 </label>{" "}
                 <input
                   className="w-80 rounded h-8 p-2"
-                  placeholder="Format: 1-10"
+                  placeholder="edu.wvu.rascl.driver.SupervisedMLRF"
                 />
               </div>
 
               <div className="flex items-center mt-2">
                 <label className="text-white mr-2" style={{ width: "150px" }}>
-                  Driver Memory
+                  Jar Name
                 </label>
                 <input
                   className="w-80 rounded h-8 p-2"
-                  placeholder="Format: 2048m"
+                  placeholder="supervisedmlrf_2.12-1.0.jar"
                 />
               </div>
 
               <div className="flex items-center mt-2">
                 <label className="text-white mr-2" style={{ width: "150px" }}>
-                  Driver Cores
+                  Dataset Name
                 </label>
                 <input
                   className="w-80 rounded h-8 p-2"
-                  placeholder="Format: 1-10"
+                  placeholder="gbt350drift_2class_labeled.csv"
                 />
               </div>
 
               <div className="flex items-center mt-2">
                 <label className="text-white mr-2" style={{ width: "150px" }}>
-                  Executor Number
+                  HDFS Output File
                 </label>
                 <input
                   className="w-80 rounded h-8 p-2"
-                  placeholder="Format: 1-10"
+                  placeholder="/data/results/palfa"
                 />
               </div>
             </div>

@@ -3,6 +3,7 @@ import ExperimentCard from "../components/experimentcard/experimentcard";
 import { useAuth } from "../components/authprovider/authprovider";
 import { useNavigate, useLocation } from "react-router-dom";
 import Header from "../components/header/header";
+import Button from "@mui/material/Button";
 
 function Home() {
   const { setToken } = useAuth();
@@ -77,6 +78,15 @@ function Home() {
               experimentState={experiment.state}
             />
           ))}
+          <Button
+            sx={{
+              background: "#002d55",
+              color: "white",
+            }}
+          >
+            {" "}
+            + New Experiment
+          </Button>
         </div>
       </div>
     </>

@@ -164,6 +164,17 @@ function CSVViewer({ experimentId }) {
       >
         Previous Page
       </Button>
+
+      <Button
+        sx={{
+          marginLeft: "10px",
+          background: "#002d55",
+          color: "white",
+        }}
+        variant="contained"
+      >
+        Download CSV
+      </Button>
     </div>
   );
 }
