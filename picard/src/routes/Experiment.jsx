@@ -244,8 +244,11 @@ function Experiment() {
             Run Experiment
           </button>
         </div>
-        <div className="bg-[#001D3D] rounded-2xl text-3xl p-0 m-0 h-full col-span-2">
-          <FileUploader />
+        <div className="bg-[#001D3D] rounded-2xl text-3xl border border-white">
+          <input type="file" id="file-upload" className="hidden" />
+          <Button>
+            <FileUploader />
+          </Button>
         </div>
       </form>
     </>

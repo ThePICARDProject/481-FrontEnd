@@ -1,18 +1,7 @@
 import "./App.css";
-import * as ReactDOM from "react-dom/client";
-import SignUp from "./routes/sign-up";
-import ForgotPassword from "./routes/forgot-password";
-import LoginPage from "./routes/loginPage";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import LandingPage from "./routes/landing_page";
-import Home from "./routes/home";
-import Experiment from "./routes/Experiment";
-import DataVisualization from "./routes/data_visualization";
-import History from "./routes/history";
 import AuthProvider from "./components/authprovider/authprovider";
 import Routes from "./routes";
-import AccessPage from "./routes/access-page";
 
 // const router = createBrowserRouter([
 //   {

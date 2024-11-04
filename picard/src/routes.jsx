@@ -5,7 +5,7 @@ import AuthPage from "./routes/user_auth.jsx";
 import "./index.css";
 import Experiment from "./routes/Experiment.jsx";
 import LandingPage from "./routes/landing_page.jsx";
-import Home from "./pages/home.jsx";
+import Home from "./routes/home.jsx";
 import ProtectedRoute from "./components/protectedroute/protectedroute.jsx";
 import DataVisualization from "./routes/data_visualization.jsx";
 import QueuePage from "./routes/processing_page.jsx";
