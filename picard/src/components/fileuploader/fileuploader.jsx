@@ -22,8 +22,7 @@ const FileUploader = () => {
         {
           withCredentials: true,
           headers: {
-            ChunkNumber: start,
-            UploadId: "test",
+            ChunkNumber: start + 1,
             TotalChunks: total,
             "Content-Type": "multipart/form-data",
           },

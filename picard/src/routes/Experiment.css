@@ -3,3 +3,46 @@
     margin: 0 auto;
     text-align: center;
   }
+
+  .run-experiment-button {
+    padding: 15px 30px;
+    background-color: #001D3D;
+    color: #FFD60A;
+    font-family: 'Tourney', sans-serif;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.run-experiment-button:hover {
+    background-color: #002d5c; 
+}
+
+.dataset-entry {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #002d5c;
+  color: #FFD60A;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+.dataset-entry:hover {
+  background-color: #004080;
+}
+
+.dataset-entry.selected {
+  background-color: #001D3D;
+  outline: 2px solid #FFD60A;
+}

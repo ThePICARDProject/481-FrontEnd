@@ -7,315 +7,247 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
+import ClusterParameters from "../components/cluster_parameters/clusterparameters";
+import { useEffect } from "react";
+import Jsonify from "../components/formDataUtility/jsonify.jsx";
+
+// DatasetEntry component for individual dataset buttons
+const DatasetEntry = ({ name, isSelected, onClick }) => (
+  <button
+    type="button"
+    className={`dataset-entry ${isSelected ? "selected" : ""}`}
+    onClick={onClick}
+  >
+    {name}
+  </button>
+);
+
+// PackageEntry component for individual package buttons
+const PackageEntry = ({ name, isSelected, onClick }) => (
+  <button
+    type="button"
+    className={`dataset-entry ${isSelected ? "selected" : ""}`} // Reusing the same class for style consistency
+    onClick={onClick}
+  >
+    {name}
+  </button>
+);
 
 function Experiment() {
-  const { search } = useLocation();
-  const queryParams = new URLSearchParams(search);
-  const experimentId = queryParams.get("experimentId");
+  const [clusterParameters, setClusterParameters] = useState([]);
+  useEffect(() => {
+    fetch("../config.json")
+      .then((response) => response.json())
+      .then((data) => setClusterParameters(data.cluster_parameters))
+      .catch((error) =>
+        console.error("Error fetching cluster parameters:", error)
+      );
+  }, []);
 
-  const parameters = [
-    { parameterType: "number", placeholder: "160Gb" },
-    { parameterType: "number", placeholder: "160Gb" },
-    { parameterType: "number", placeholder: "160Gb" },
-    { parameterType: "number", placeholder: "160Gb" },
-    { parameterType: "number", placeholder: "160Gb" },
-    { parameterType: "number", placeholder: "160Gb" },
-    { parameterType: "number", placeholder: "160Gb" },
-    { parameterType: "number", placeholder: "160Gb" },
+  const [selectedDataset, setSelectedDataset] = useState(null); // Track selected dataset
+  const [selectedPackage, setSelectedPackage] = useState(null); // Track selected package
+  const [parameterValues, setParameterValues] = useState({}); // Track parameter values
+  const [mode, setMode] = useState("datasets");
+
+  const [additionalParameters, setAdditionalParameters] = useState([]);
+  const [newParameterName, setNewParameterName] = useState("");
+  const [newParameterValue, setNewParameterValue] = useState("");
+
+  const datasets = ["Star Data 1", "Star Data 2", "Star Data 3", "Star Data 4"];
+
+  const packages = ["Package1", "Package2", "Package3", "Package4"];
+
+  const experiment_parameters = [
+    {
+      name: "Class Name",
+      parameterType: "string",
+      placeholder: "edu.wvu.rascl.driver.SupervisedMLRF",
+    },
+    {
+      name: "Jar Name",
+      parameterType: "string",
+      placeholder: "supervisedmlrf_2.12-1.0.jar",
+    },
+    {
+      name: "Dataset Name",
+      parameterType: "string",
+      placeholder: "gbt350drift_2class_labeled.csv",
+    },
+    {
+      name: "HDFS Output File",
+      parameterType: "string",
+      placeholder: "/data/results/palfa",
+    },
   ];
 
-  let dataSets = null;
-
-  if (experimentId === "1") {
-    dataSets = [
-      "Boston Housing Data 1",
-      "Boston Housing Data 2",
-      "Boston Housing Data 3",
-      "Boston Housing Data 4",
-      "Boston Housing Data 5",
-    ];
-  }
-
-  if (experimentId === "2") {
-    dataSets = [
-      "ICS Power Data 1",
-      "ICS Power Data 2",
-      "ICS Power Data 3",
-      "ICS Power Data 4",
-      "ICS Power Data 5",
-    ];
-  }
-
-  if (experimentId === "3") {
-    dataSets = [
-      "NOAA Weather Data 1",
-      "NOAA Weather Data 2",
-      "NOAA Weather Data 3",
-      "NOAA Weather Data 4",
-      "NOAA Weather Data 5",
-    ];
-  }
-
-  if (experimentId === "4") {
-    dataSets = [
-      "Pulsar Data 1",
-      "Pulsar Data 2",
-      "Pulsar Data 3",
-      "Pulsar Data 4",
-      "Pulsar Data 5",
-    ];
-  }
-
-  const navigate = useNavigate();
-
-  const handleNavigation = () => {
-    navigate(`/visualization?experimentId=${experimentId}`);
+  // Handle parameter change
+  const handleParameterChange = (name, value) => {
+    setParameterValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
   };
 
-  const handleRunExperimentClick = () => {
-    navigate("/queue");
+  const addAdditionalParameter = () => {
+    if (newParameterName && newParameterValue) {
+      setAdditionalParameters([
+        ...additionalParameters,
+        { name: newParameterName, value: newParameterValue },
+      ]);
+      setNewParameterName("");
+      setNewParameterValue("");
+    }
   };
 
-  const handleFileChange = async (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("file", file);
-    const res = await axios
-      .post("http://localhost:5080/api/dataset/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    // No need to map or modify cluster parameters, we’ll use them as is
+    const jsonData = Jsonify({
+      selectedDataset:
+        selectedDataset !== null ? datasets[selectedDataset] : null,
+      selectedPackage:
+        selectedPackage !== null ? packages[selectedPackage] : null,
+      parameterValues,
+      additionalParameters,
+      clusterParameters, // Pass cluster parameters directly from config.json
+    });
+
+    // Send the jsonData to the backend
+    fetch("http://localhost:5080/api/your-endpoint", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
       })
-      .then((res) => console.log(res));
-  };
-
-  const triggerFileUpload = () => {
-    document.getElementById("file-upload").click();
-  };
-
-  const [hiddenDataSets, setHiddenDataSets] = useState([]);
-
-  const handleHideDataSet = (dataSet) => {
-    setHiddenDataSets([...hiddenDataSets, dataSet]);
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
     <>
-      <div className="mt-3 main grid grid-cols-3 grid-rows-8 gap-4 h-screen p-3">
+      {/* Wrap all elements in a form */}
+      <form
+        onSubmit={handleSubmit}
+        className="mt-3 main grid grid-cols-3 grid-rows-8 gap-4 h-screen p-3"
+      >
         <Header className="col-span-2" />
         <div className="col-span-3"></div>
 
-        <div
-          className="bg-[#001D3D] row-span-4 rounded-2xl border border-white overflow-hidden"
-          style={{
-            maxHeight: "450px",
-            overflowY: "auto",
-            padding: "10px",
-            scrollbarWidth: "none",
-          }}
-          onWheel={(e) => e.preventDefault()}
-        >
-          <div className="text-white mt-3 w-full" style={{ fontSize: "20px" }}>
-            Virtual Machine Parameters
-          </div>
+        {/* Cluster Parameters, see component */}
+        <ClusterParameters />
 
-          <div className="flex flex-col mr-3">
-            <div className="flex items-center mt-2 ">
-              {" "}
-              <label className="text-white mr-2" style={{ width: "150px" }}>
-                Node Count
-              </label>{" "}
-              <input
-                className="w-80 rounded h-8 p-2"
-                placeholder="1"
-                disabled
-              />
-            </div>
-
-            <div className="flex items-center mt-2">
-              <label className="text-white mr-2" style={{ width: "150px" }}>
-                Driver Memory
-              </label>
-              <input
-                className="w-80 rounded h-8 p-2"
-                placeholder="2048m"
-                disabled
-              />
-            </div>
-
-            <div className="flex items-center mt-2">
-              <label className="text-white mr-2" style={{ width: "150px" }}>
-                Driver Cores
-              </label>
-              <input
-                className="w-80 rounded h-8 p-2"
-                placeholder="1"
-                disabled
-              />
-            </div>
-
-            <div className="flex items-center mt-2">
-              <label className="text-white mr-2" style={{ width: "150px" }}>
-                Executor Number
-              </label>
-              <input
-                className="w-80 rounded h-8 p-2"
-                placeholder="1"
-                disabled
-              />
-            </div>
-
-            <div className="flex items-center mt-2">
-              <label className="text-white mr-2" style={{ width: "150px" }}>
-                Executor Cores
-              </label>
-              <input
-                className="w-80 rounded h-8 p-2"
-                placeholder="1"
-                disabled
-              />
-            </div>
-
-            <div className="flex items-center mt-2">
-              <label className="text-white mr-2" style={{ width: "150px" }}>
-                Executor Memory
-              </label>
-              <input
-                className="w-80 rounded h-8 p-2"
-                placeholder="2048m"
-                disabled
-              />
-            </div>
-
-            <div className="flex items-center mt-2">
-              <label className="text-white mr-2" style={{ width: "150px" }}>
-                Memory Overhead
-              </label>
-              <input
-                className="w-80 rounded h-8 p-2"
-                placeholder="1"
-                disabled
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="col-span-2 bg-[#001D3D] row-span-6 rounded-2xl p-5 overflow-y-hidden border border-white">
+        {/* datasets and packages section */}
+        <div className="col-span-2 bg-[#001D3D] row-span-6 rounded-2xl p-5">
           <div className="w-full h-full rounded-2xl">
-            <h1 className="text-5xl">Current Data Sets</h1>
-            <hr className="my-4 border-white" />
-
-            {dataSets
-              .filter((dataSet) => !hiddenDataSets.includes(dataSet))
-              .map((dataSet, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between my-2"
-                >
-                  <h2
-                    className="text-3xl text-left cursor-pointer"
-                    onClick={handleNavigation}
-                  >
-                    {dataSet}
-                  </h2>
-                  <button
-                    onClick={() => handleHideDataSet(dataSet)}
-                    className="text-white bg-red-500 rounded px-3 py-1"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="24px"
-                      height="24px"
-                    >
-                      <path d="M 10 2 L 9 3 L 5 3 C 4.4 3 4 3.4 4 4 C 4 4.6 4.4 5 5 5 L 7 5 L 17 5 L 19 5 C 19.6 5 20 4.6 20 4 C 20 3.4 19.6 3 19 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.1 5.9 22 7 22 L 17 22 C 18.1 22 19 21.1 19 20 L 19 7 L 5 7 z M 9 9 C 9.6 9 10 9.4 10 10 L 10 19 C 10 19.6 9.6 20 9 20 C 8.4 20 8 19.6 8 19 L 8 10 C 8 9.4 8.4 9 9 9 z M 15 9 C 15.6 9 16 9.4 16 10 L 16 19 C 16 19.6 15.6 20 15 20 C 14.4 20 14 19.6 14 19 L 14 10 C 14 9.4 14.4 9 15 9 z" />
-                    </svg>
-                  </button>
-                </div>
-              ))}
+            <h1 className="underline text-5xl">
+              <span
+                className={`cursor-pointer ${
+                  mode === "datasets" ? "text-yellow-500" : ""
+                }`}
+                onClick={() => setMode("datasets")}
+              >
+                Current Data Sets
+              </span>
+              {" / "}
+              <span
+                className={`cursor-pointer ${
+                  mode === "packages" ? "text-yellow-500" : ""
+                }`}
+                onClick={() => setMode("packages")}
+              >
+                Current Packages
+              </span>
+            </h1>
+            <div className="dataset-list">
+              {(mode === "datasets" ? datasets : packages).map((item, index) =>
+                mode === "datasets" ? (
+                  <DatasetEntry
+                    key={index}
+                    name={item}
+                    isSelected={selectedDataset === index}
+                    onClick={() => setSelectedDataset(index)}
+                  />
+                ) : (
+                  <PackageEntry
+                    key={index}
+                    name={item}
+                    isSelected={selectedPackage === index}
+                    onClick={() => setSelectedPackage(index)}
+                  />
+                )
+              )}
+            </div>
           </div>
         </div>
-        <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto overflow-y-hidden border border-white">
-          <div
-            style={{
-              maxHeight: "400px",
-              overflowY: "auto",
-              padding: "10px",
-              scrollbarWidth: "none",
-            }}
-            onWheel={(e) => e.preventDefault()}
-          >
-            <div
-              className="text-white mt-3 w-full"
-              style={{ fontSize: "20px" }}
+
+        {/* Experiment Parameters */}
+        <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto overflow-x-auto">
+          <div className="text-white mt-3 w-full">Experiment Parameters</div>
+          {experiment_parameters.map((parameter, index) => (
+            <div key={index} className="flex items-center mt-2">
+              <label className="text-white w-1/4 pl-4">{parameter.name}:</label>
+              <Parameter
+                parameterType={parameter.parameterType}
+                placeholder={parameter.placeholder}
+                name={parameter.name}
+                onChange={handleParameterChange}
+                className="flex-grow"
+              />
+            </div>
+          ))}
+          {additionalParameters.map((param, index) => (
+            <div key={index} className="flex items-center mt-2">
+              <label className="text-white w-1/4 pl-4">{param.name}:</label>
+              <input
+                type="text"
+                value={param.value}
+                readOnly
+                className="rounded-3xl m-4 flex-grow text-white bg-[#001D3D]"
+              />
+            </div>
+          ))}
+          <div className="flex items-center mt-2">
+            <input
+              type="text"
+              placeholder="Parameter Name"
+              value={newParameterName}
+              onChange={(e) => setNewParameterName(e.target.value)}
+              className="rounded-3xl m-4 flex-grow text-black bg-white"
+            />
+            <input
+              type="text"
+              placeholder="Parameter Value"
+              value={newParameterValue}
+              onChange={(e) => setNewParameterValue(e.target.value)}
+              className="rounded-3xl m-4 flex-grow text-black bg-white"
+            />
+            <button
+              type="button"
+              onClick={addAdditionalParameter}
+              className="rounded-3xl bg-blue-500 text-white p-2"
             >
-              Experiment Parameters
-            </div>
-
-            <div className="flex flex-col mr-3">
-              <div className="flex items-center mt-2">
-                {" "}
-                <label className="text-white mr-2" style={{ width: "150px" }}>
-                  Class Name
-                </label>{" "}
-                <input
-                  className="w-80 rounded h-8 p-2"
-                  placeholder="edu.wvu.rascl.driver.SupervisedMLRF"
-                />
-              </div>
-
-              <div className="flex items-center mt-2">
-                <label className="text-white mr-2" style={{ width: "150px" }}>
-                  Jar Name
-                </label>
-                <input
-                  className="w-80 rounded h-8 p-2"
-                  placeholder="supervisedmlrf_2.12-1.0.jar"
-                />
-              </div>
-
-              <div className="flex items-center mt-2">
-                <label className="text-white mr-2" style={{ width: "150px" }}>
-                  Dataset Name
-                </label>
-                <input
-                  className="w-80 rounded h-8 p-2"
-                  placeholder="gbt350drift_2class_labeled.csv"
-                />
-              </div>
-
-              <div className="flex items-center mt-2">
-                <label className="text-white mr-2" style={{ width: "150px" }}>
-                  HDFS Output File
-                </label>
-                <input
-                  className="w-80 rounded h-8 p-2"
-                  placeholder="/data/results/palfa"
-                />
-              </div>
-            </div>
+              Add Parameter
+            </button>
           </div>
         </div>
-        <div className="bg-[#001D3D] rounded-2xl text-3xl border border-white">
-          <button className="w-full h-full" onClick={handleRunExperimentClick}>
+
+        <div className="bg-[#001D3D] rounded-2xl text-3xl">
+          <button type="submit" className="w-full h-full run-experiment-button">
             Run Experiment
           </button>
         </div>
-
-        <div className="bg-[#001D3D] rounded-2xl text-3xl border border-white">
-          <input
-            onChange={handleFileChange}
-            type="file"
-            id="file-upload"
-            className="hidden"
-          />
-          <Button>
-            <FileUploader />
-          </Button>
+        <div className="bg-[#001D3D] rounded-2xl text-3xl p-0 m-0 h-full col-span-2">
+          <FileUploader />
         </div>
-        <div />
-      </div>
+      </form>
     </>
   );
 }

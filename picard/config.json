@@ -1,0 +1,40 @@
+{
+    "cluster_parameters": [
+      {
+        "name": "Node Count",
+        "type": "number",
+        "value": "1"
+      },
+      {
+        "name": "Driver Memory",
+        "type": "string",
+        "value": "2048m"
+      },
+      {
+        "name": "Driver Cores",
+        "type": "number",
+        "value": "1"
+      },
+      {
+        "name": "Executor Number",
+        "type": "number",
+        "value": "1"
+      },
+      {
+        "name": "Executor Cores",
+        "type": "number",
+        "value": "1"
+      },
+      {
+        "name": "Executor Memory",
+        "type": "string",
+        "value": "2048m"
+      },
+      {
+        "name": "Memory Overhead",
+        "type": "number",
+        "value": "1"
+      }
+    ]
+  }
+  
