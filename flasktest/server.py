@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import pandas as pd
 from flask_cors import CORS, cross_origin
 import os
@@ -11,6 +11,14 @@ CORS(app)
 @cross_origin()
 def index():
     return "Welcome to the Upload Service"
+
+@app.route('/parameters_and_packages', methods=['GET'])
+def return_datasets_packages():
+    data = {
+            "packages": ["Package1", "Package2", "Package3", "Package4"],
+            "datasets": ["Star Data 1", "Star Data 2", "Star Data 3", "Star Data 4"]
+        }
+    return jsonify(data)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():

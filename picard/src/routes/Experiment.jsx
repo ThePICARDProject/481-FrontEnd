@@ -43,6 +43,36 @@ function Experiment() {
       .catch((error) =>
         console.error("Error fetching cluster parameters:", error)
       );
+    
+      axios.get("http://127.0.0.1:5000/parameters_and_packages").then((res) => {
+        //packages = JSON.parse(res).get("packages");
+        //packages = JSON.parse(res).get("packages");
+        console.log(res);
+      })
+    /*
+    axios.get("http://localhost:5080/something"
+    ).then((response) => {
+        //experiment_parameters = response.data;
+    }).catch(error => {
+      console.error(error);
+    });
+  
+    axios.get("http://localhost:5080/someotherthing").then(response => {
+      // datasets = response.data;
+      datasets = JSON.parse(datasetsJSON);
+    }).catch(eroor => {
+      console.log(error);
+    });
+  
+    axios.get("http://localhost:5080/someotherotherthing").then(response => {
+      //packages = response.data;
+      
+      packages = JSON.parse(packagesJSON);
+    }).catch(error => {
+      console.log(error);
+    })
+       */
+
   }, []);
 
   const [selectedDataset, setSelectedDataset] = useState(null); // Track selected dataset
@@ -54,10 +84,12 @@ function Experiment() {
   const [newParameterName, setNewParameterName] = useState("");
   const [newParameterValue, setNewParameterValue] = useState("");
 
-  const datasets = ["Star Data 1", "Star Data 2", "Star Data 3", "Star Data 4"];
+  const datasetsJSON = '["Star Data 1", "Star Data 2", "Star Data 3", "Star Data 4"]';
 
-  const packages = ["Package1", "Package2", "Package3", "Package4"];
+  const packagesJSON = '["Package1", "Package2", "Package3", "Package4"]';
 
+  const datasets = JSON.parse(datasetsJSON);
+  const packages = JSON.parse(packagesJSON);
   const experiment_parameters = [
     {
       name: "Class Name",
