@@ -36,6 +36,16 @@ const PackageEntry = ({ name, isSelected, onClick }) => (
 
 function Experiment() {
   const [clusterParameters, setClusterParameters] = useState([]);
+  const [selectedDataset, setSelectedDataset] = useState(null); // Track selected dataset
+  const [selectedPackage, setSelectedPackage] = useState(null); // Track selected package
+  const [parameterValues, setParameterValues] = useState({}); // Track parameter values
+  const [mode, setMode] = useState("datasets");
+  const [datasets, setDatasets] = useState();
+  const [packages, setPackages] = useState();
+  const [additionalParameters, setAdditionalParameters] = useState([]);
+  const [newParameterName, setNewParameterName] = useState("");
+  const [newParameterValue, setNewParameterValue] = useState("");
+
   useEffect(() => {
     fetch("../config.json")
       .then((response) => response.json())
@@ -43,43 +53,16 @@ function Experiment() {
       .catch((error) =>
         console.error("Error fetching cluster parameters:", error)
       );
+
+    axios.get("http://127.0.0.1:5000/getDataset").then((res) => {
+      setDatasets(res.data.datasets);
+      setPackages(res.data.packages);
+    });
+
+    axios.get("http://127.0.0.1:5000/getParameters").then((res) => {
+      setParameterValues(res.data.parameters);
+    });
   }, []);
-
-  const [selectedDataset, setSelectedDataset] = useState(null); // Track selected dataset
-  const [selectedPackage, setSelectedPackage] = useState(null); // Track selected package
-  const [parameterValues, setParameterValues] = useState({}); // Track parameter values
-  const [mode, setMode] = useState("datasets");
-
-  const [additionalParameters, setAdditionalParameters] = useState([]);
-  const [newParameterName, setNewParameterName] = useState("");
-  const [newParameterValue, setNewParameterValue] = useState("");
-
-  const datasets = ["Star Data 1", "Star Data 2", "Star Data 3", "Star Data 4"];
-
-  const packages = ["Package1", "Package2", "Package3", "Package4"];
-
-  const experiment_parameters = [
-    {
-      name: "Class Name",
-      parameterType: "string",
-      placeholder: "edu.wvu.rascl.driver.SupervisedMLRF",
-    },
-    {
-      name: "Jar Name",
-      parameterType: "string",
-      placeholder: "supervisedmlrf_2.12-1.0.jar",
-    },
-    {
-      name: "Dataset Name",
-      parameterType: "string",
-      placeholder: "gbt350drift_2class_labeled.csv",
-    },
-    {
-      name: "HDFS Output File",
-      parameterType: "string",
-      placeholder: "/data/results/palfa",
-    },
-  ];
 
   // Handle parameter change
   const handleParameterChange = (name, value) => {
@@ -168,22 +151,26 @@ function Experiment() {
               </span>
             </h1>
             <div className="dataset-list">
-              {(mode === "datasets" ? datasets : packages).map((item, index) =>
-                mode === "datasets" ? (
-                  <DatasetEntry
-                    key={index}
-                    name={item}
-                    isSelected={selectedDataset === index}
-                    onClick={() => setSelectedDataset(index)}
-                  />
-                ) : (
-                  <PackageEntry
-                    key={index}
-                    name={item}
-                    isSelected={selectedPackage === index}
-                    onClick={() => setSelectedPackage(index)}
-                  />
+              {datasets && datasets.length > 0 ? (
+                (mode === "datasets" ? datasets : packages).map((item, index) =>
+                  mode === "datasets" ? (
+                    <DatasetEntry
+                      key={index}
+                      name={item}
+                      isSelected={selectedDataset === index}
+                      onClick={() => setSelectedDataset(index)}
+                    />
+                  ) : (
+                    <PackageEntry
+                      key={index}
+                      name={item}
+                      isSelected={selectedPackage === index}
+                      onClick={() => setSelectedPackage(index)}
+                    />
+                  )
                 )
+              ) : (
+                <p>No mode selected</p>
               )}
             </div>
           </div>
@@ -192,18 +179,24 @@ function Experiment() {
         {/* Experiment Parameters */}
         <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto overflow-x-auto">
           <div className="text-white mt-3 w-full">Experiment Parameters</div>
-          {experiment_parameters.map((parameter, index) => (
-            <div key={index} className="flex items-center mt-2">
-              <label className="text-white w-1/4 pl-4">{parameter.name}:</label>
-              <Parameter
-                parameterType={parameter.parameterType}
-                placeholder={parameter.placeholder}
-                name={parameter.name}
-                onChange={handleParameterChange}
-                className="flex-grow"
-              />
-            </div>
-          ))}
+          {parameterValues && parameterValues.length > 0 ? (
+            parameterValues.map((parameter, index) => (
+              <div key={index} className="flex items-center mt-2">
+                <label className="text-white w-1/4 pl-4">
+                  {parameter.name}:
+                </label>
+                <Parameter
+                  parameterType={parameter.parameterType}
+                  placeholder={parameter.placeholder}
+                  name={parameter.name}
+                  onChange={handleParameterChange}
+                  className="flex-grow"
+                />
+              </div>
+            ))
+          ) : (
+            <p>No mode selected</p>
+          )}
           {additionalParameters.map((param, index) => (
             <div key={index} className="flex items-center mt-2">
               <label className="text-white w-1/4 pl-4">{param.name}:</label>
