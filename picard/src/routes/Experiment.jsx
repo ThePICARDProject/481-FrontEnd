@@ -204,7 +204,7 @@ function Experiment() {
                 type="text"
                 value={param.value}
                 readOnly
-                className="rounded-3xl m-4 flex-grow text-white bg-[#001D3D]"
+                className="rounded flex text-white bg-[#001D3D]"
               />
             </div>
           ))}

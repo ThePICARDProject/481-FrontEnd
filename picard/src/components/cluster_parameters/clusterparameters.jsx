@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-const ClusterParameters = ({ }) => {
+const ClusterParameters = ({}) => {
   const [clusterParameters, setClusterParameters] = useState([]);
 
   useEffect(() => {
-    fetch('../config.json')
+    fetch("../config.json")
       .then((response) => response.json())
       .then((data) => setClusterParameters(data.cluster_parameters))
-      .catch((error) => console.error('Error fetching cluster parameters:', error));
+      .catch((error) =>
+        console.error("Error fetching cluster parameters:", error)
+      );
   }, []);
 
   return (
@@ -16,7 +18,11 @@ const ClusterParameters = ({ }) => {
       {clusterParameters.map((parameter, index) => (
         <div key={index} className="flex items-center mt-2">
           <label className="text-white w-1/4 pl-4">{parameter.name}:</label>
-          <span className="text-white flex-grow">{parameter.value}</span>
+          <input
+            className="text-white flex"
+            placeholder={parameter.value}
+            disabled
+          ></input>
         </div>
       ))}
     </div>
