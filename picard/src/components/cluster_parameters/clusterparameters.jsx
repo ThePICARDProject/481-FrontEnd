@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Form from "react-bootstrap/Form";
 
 const ClusterParameters = ({}) => {
   const [clusterParameters, setClusterParameters] = useState([]);
@@ -14,16 +15,25 @@ const ClusterParameters = ({}) => {
 
   return (
     <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto overflow-x-hidden">
-      <div className="text-white mt-3 w-full">Cluster Parameters</div>
+      <p className="text-white mt-3 w-full text-xl">Cluster Parameters</p>
       {clusterParameters.map((parameter, index) => (
-        <div key={index} className="flex items-center mt-2">
-          <label className="text-white w-1/4 pl-4">{parameter.name}:</label>
-          <input
-            className="text-white flex"
-            placeholder={parameter.value}
-            disabled
-          ></input>
-        </div>
+        <Form>
+          <Form.Group className="mb-3">
+            <Form.Label
+              className="mb-3 d-flex align-items-center mx-5"
+              style={{ color: `white` }}
+            >
+              {parameter.name}
+            </Form.Label>
+            <Form.Control
+              className="mb-3 d-flex align-items-center mx-5"
+              type="text"
+              style={{ width: "80%" }}
+              placeholder={parameter.value}
+              disabled
+            />
+          </Form.Group>
+        </Form>
       ))}
     </div>
   );

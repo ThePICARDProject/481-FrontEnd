@@ -15,7 +15,7 @@ def index():
 def datasets():
     return {
         "datasets": ["Star Data 1", "Star Data 2", "Star Data 3", "Star Data 4"],
-        "packages": ["Package1", "Package2", "Package3", "Package4"],
+        "algorithms": ["Package1", "Package2", "Package3", "Package4"],
     }
 
 

@@ -12,6 +12,7 @@ import QueuePage from "./routes/processing_page.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "./components/authprovider/authprovider.jsx";
 import { Children } from "react";
+import ExperimentSetup from "./routes/experimentSetup.jsx";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -47,6 +48,10 @@ const Routes = () => {
         {
           path: "/experiment",
           element: <Experiment />,
+        },
+        {
+          path: "/experimentSetup",
+          element: <ExperimentSetup />,
         },
         {
           path: "/visualization",

@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./index.css";
 import AuthProvider from "./components/authprovider/authprovider";
