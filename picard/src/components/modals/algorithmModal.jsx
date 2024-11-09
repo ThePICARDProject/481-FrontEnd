@@ -6,7 +6,8 @@ import Form from "react-bootstrap/Form";
 function AlgorithmModal() {
   const [show, setShow] = useState(false);
   const [jarFile, setJarFile] = useState(null);
-  const [parameters, setParameters] = useState([{ name: "", value: "" }]);
+  const [parameters, setParameters] = useState([{ name: "", dataType: "int" }]);
+  const [AlgorithmName, setAlgorithmName] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,12 +21,26 @@ function AlgorithmModal() {
     setParameters(newParameters);
   };
 
+  const handleAlgNameChange = (e) => {
+    setAlgorithmName(e.target.value);
+  };
+
   const addParameter = () =>
-    setParameters([...parameters, { name: "", value: "" }]);
+    setParameters([...parameters, { name: "", dataType: "int" }]);
 
   const removeParameter = (index) => {
     const newParameters = parameters.filter((_, i) => i !== index);
     setParameters(newParameters);
+  };
+
+  const handleModalSubmit = () => {
+    const algorithmData = {
+      algorithmName: AlgorithmName,
+      parameters,
+      jarFileName: jarFile ? jarFile.name : null,
+    };
+    console.log(algorithmData);
+    handleClose();
   };
 
   return (
@@ -47,6 +62,15 @@ function AlgorithmModal() {
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>Upload JAR File</Form.Label>
               <Form.Control type="file" onChange={handleFileChange} />
+
+              {/* Algorithm Name Input */}
+              <Form.Control
+                type="text"
+                placeholder="Algorithm Name"
+                value={AlgorithmName}
+                onChange={handleAlgNameChange}
+                className="mt-3"
+              />
             </Form.Group>
 
             {/* Parameters Section */}
@@ -62,14 +86,17 @@ function AlgorithmModal() {
                     onChange={(e) => handleParameterChange(index, e)}
                     className="me-2"
                   />
-                  <Form.Control
-                    type="text"
-                    name="value"
-                    placeholder="Data Type"
-                    value={param.value}
+                  <Form.Select
+                    name="dataType"
+                    value={param.dataType}
                     onChange={(e) => handleParameterChange(index, e)}
                     className="me-2"
-                  />
+                  >
+                    <option value="int">int</option>
+                    <option value="float">float</option>
+                    <option value="boolean">boolean</option>
+                    <option value="string">string</option>
+                  </Form.Select>
                   <Button
                     variant="danger"
                     onClick={() => removeParameter(index)}
@@ -97,7 +124,7 @@ function AlgorithmModal() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="success" onClick={handleClose}>
+          <Button variant="success" onClick={handleModalSubmit}>
             Save Algorithm
           </Button>
         </Modal.Footer>

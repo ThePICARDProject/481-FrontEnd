@@ -28,7 +28,7 @@ const DatasetEntry = ({ name, isSelected, onClick }) => (
 const PackageEntry = ({ name, isSelected, onClick }) => (
   <button
     type="button"
-    className={`dataset-entry ${isSelected ? "selected" : ""}`} // Reusing the same class for style consistency
+    className={`dataset-entry ${isSelected ? "selected" : ""}`}
     onClick={onClick}
   >
     {name}
@@ -39,7 +39,7 @@ function Experiment() {
   const [clusterParameters, setClusterParameters] = useState([]);
   const [selectedDataset, setSelectedDataset] = useState(null); // Track selected dataset
   const [selectedPackage, setSelectedPackage] = useState(null); // Track selected package
-  // const [parameterValues, setParameterValues] = useState({}); // Track parameter values
+  const [parameterValues, setParameterValues] = useState({}); // Track parameter values
   const [mode, setMode] = useState("datasets");
   // const [datasets, setDatasets] = useState();
   // const [packages, setPackages] = useState();
@@ -88,30 +88,34 @@ function Experiment() {
 
   // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
-    // No need to map or modify cluster parameters, we’ll use them as is
-    const jsonData = Jsonify({
-      selectedDataset:
-        selectedDataset !== null ? datasets[selectedDataset] : null,
-      selectedPackage:
-        selectedPackage !== null ? packages[selectedPackage] : null,
-      parameterValues,
-      additionalParameters,
-      clusterParameters, // Pass cluster parameters directly from config.json
-    });
+    const clusterParamsData = clusterParameters.reduce((acc, param) => {
+      acc[param.name] = param.value || null;
+      return acc;
+    }, {});
 
-    // Send the jsonData to the backend
+    const jsonData = {
+      algorithmId: algorithm?.id || 0,
+      datasetName:
+        selectedDataset !== null ? datasets[selectedDataset] : "null",
+      ...clusterParamsData,
+      parameterValues: Object.entries(parameterValues).map(([name, value]) => ({
+        parameterId: name,
+        value: value || "string",
+      })),
+    };
+
+    console.log("Experiment Data:", JSON.stringify(jsonData, null, 2));
+
     axios
-      .post("http://localhost:5080/api/experiment/submit", {
+      .post("http://localhost:5080/api/experiment/submit", jsonData, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(jsonData),
       })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
+      .then((response) => {
+        console.log("Success:", response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -128,7 +132,6 @@ function Experiment() {
         <Header className="col-span-2" />
         <div className="col-span-3"></div>
 
-        {/* Cluster Parameters, see component */}
         <ClusterParameters />
 
         {/* datasets and packages section */}
@@ -166,35 +169,6 @@ function Experiment() {
           <div className="text-white mt-3 w-full text-xl">
             Experiment Parameters
           </div>
-          {/* {parameterValues && parameterValues.length > 0 ? (
-            parameterValues.map((parameter, index) => (
-              <div key={index} className="flex items-center mt-2">
-                <label className="text-white w-1/4 pl-4">
-                  {parameter.name}:
-                </label>
-                <Parameter
-                  parameterType={parameter.parameterType}
-                  placeholder={parameter.placeholder}
-                  name={parameter.name}
-                  onChange={handleParameterChange}
-                  className="flex-grow"
-                />
-              </div>
-            ))
-          ) : (
-            <p>No mode selected</p>
-          )} */}
-          {/* {additionalParameters.map((param, index) => (
-            <div key={index} className="flex items-center mt-2">
-              <label className="text-white w-1/4 pl-4">{param.name}:</label>
-              <input
-                type="text"
-                value={param.value}
-                readOnly
-                className="rounded flex text-white bg-[#001D3D]"
-              />
-            </div>
-          ))} */}
 
           <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto overflow-x-hidden">
             <Form>
@@ -213,6 +187,31 @@ function Experiment() {
                   disabled
                 />
               </Form.Group>
+
+              <div className="dataset-list">
+                {parameterValues && parameterValues.length > 0 ? (
+                  parameterValues.map((parameter, index) => (
+                    <Form>
+                      <Form.Group className="mb-3">
+                        <Form.Label
+                          className="mb-3 d-flex align-items-center mx-5"
+                          style={{ color: `white` }}
+                        >
+                          {parameter.name}
+                        </Form.Label>
+                        <Form.Control
+                          className="mb-3 d-flex align-items-center mx-5"
+                          type="text"
+                          style={{ width: "80%" }}
+                          placeholder={parameter.placeholder}
+                        />
+                      </Form.Group>
+                    </Form>
+                  ))
+                ) : (
+                  <p className="text-white mx-5">No mode selected</p>
+                )}
+              </div>
             </Form>
           </div>
         </div>

@@ -32,6 +32,14 @@ function ExperimentSetup() {
   };
 
   const proceedToExperiment = () => {
+    if (selectedAlgorithm.length === 0) {
+      alert("Please select an algorithm.");
+      return;
+    }
+    if (selectedDatasets.length === 0) {
+      alert("Please select at least one dataset.");
+      return;
+    }
     navigate("/experiment", {
       state: { algorithm: selectedAlgorithm, datasets: selectedDatasets },
     });
