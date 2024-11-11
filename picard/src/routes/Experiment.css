@@ -40,9 +40,10 @@
 
 .dataset-entry:hover {
   background-color: #004080;
+  outline: 2px solid #FFD60A;
 }
 
 .dataset-entry.selected {
-  background-color: #001D3D;
+  background-color: #004080;
   outline: 2px solid #FFD60A;
 }

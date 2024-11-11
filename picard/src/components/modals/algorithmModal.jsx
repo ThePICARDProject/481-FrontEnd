@@ -114,7 +114,7 @@ function AlgorithmModal() {
                   </Button>
                 </div>
               ))}
-              <Button variant="success" onClick={addParameter}>
+              <Button className="bg-[#001D3D]" onClick={addParameter}>
                 + Add Parameter
               </Button>
             </div>
@@ -124,7 +124,7 @@ function AlgorithmModal() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="success" onClick={handleModalSubmit}>
+          <Button variant="warning" onClick={handleModalSubmit}>
             Save Algorithm
           </Button>
         </Modal.Footer>

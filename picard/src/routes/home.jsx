@@ -78,10 +78,6 @@ function Home() {
               experimentState={experiment.state}
             />
           ))}
-          <Button href="/experimentSetup" variant="dark">
-            {" "}
-            + New Experiment
-          </Button>
         </div>
       </div>
     </>
