@@ -47,6 +47,13 @@ const Header = () => {
             >
               Home
             </a>
+            <a
+              href="/experimentSetup"
+              className="hover:text-blue-700"
+              style={{ fontSize: "25px" }}
+            >
+              New Experiment
+            </a>
           </div>
         </div>
 

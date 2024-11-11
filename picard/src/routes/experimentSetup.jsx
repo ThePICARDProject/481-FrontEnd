@@ -109,7 +109,7 @@ function ExperimentSetup() {
 
   return (
     <div>
-      <div className="flex justify-center items-center h-screen grid grid-cols-2 grid-rows-6">
+      <div className="w-screen items-center h-screen grid grid-cols-2 grid-rows-6">
         {/* Header section */}
         <div className="col-span-2 row-span-1">
           <Header />
@@ -118,7 +118,7 @@ function ExperimentSetup() {
         {/* Algorithms Section */}
         <div className="col-span-1 bg-[#001D3D] row-span-4 rounded-2xl p-5 h-full mx-1 flex flex-col justify-between">
           <div>
-            <h1 className="text-3xl text-white">Algorithms</h1>
+            <h1 className="text-3xl text-white pb-2">Algorithms</h1>
             <form>
               {algorithms && algorithms.length > 0 ? (
                 algorithms.map((algorithm) => (
@@ -145,7 +145,7 @@ function ExperimentSetup() {
         {/* Datasets Section */}
         <div className="col-span-1 bg-[#001D3D] row-span-4 rounded-2xl p-5 h-full mx-1 flex flex-col justify-between">
           <div>
-            <h1 className="text-3xl text-white">Datasets</h1>
+            <h1 className="text-3xl text-white pb-2">Datasets</h1>
             <form>
               {datasets && datasets.length > 0 ? (
                 datasets.map((dataset) => (
@@ -182,7 +182,7 @@ function ExperimentSetup() {
 
         {/* Proceed to Experiment Setup */}
         <div className="col-span-2 row-span-1 flex justify-center mt-4">
-          <Button variant="dark" onClick={proceedToExperiment}>
+          <Button variant="warning" onClick={proceedToExperiment}>
             Proceed to Experiment Setup
           </Button>
         </div>

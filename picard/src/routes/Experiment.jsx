@@ -127,7 +127,7 @@ function Experiment() {
       {/* Wrap all elements in a form */}
       <form
         onSubmit={handleSubmit}
-        className="mt-3 main grid grid-cols-3 grid-rows-8 gap-4 h-screen p-3"
+        className="mt-3 main grid grid-cols-3 grid-rows-8 gap-4 w-screen h-screen p-3"
       >
         <Header className="col-span-2" />
         <div className="col-span-3"></div>
@@ -135,7 +135,7 @@ function Experiment() {
         <ClusterParameters />
 
         {/* datasets and packages section */}
-        <div className="col-span-2 bg-[#001D3D] row-span-6 rounded-2xl p-5">
+        <div className="col-span-2 bg-[#001D3D] row-span-6 rounded-2xl p-5 h-full overflow-y-hidden border border-white">
           <div className="w-full h-full rounded-2xl">
             <h1 className="underline text-5xl">
               <span
@@ -166,7 +166,7 @@ function Experiment() {
 
         {/* Experiment Parameters */}
         <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto overflow-x-auto">
-          <div className="text-white mt-3 w-full text-xl">
+          <div className="text-white my-3 w-full text-xl">
             Experiment Parameters
           </div>
 
@@ -174,15 +174,15 @@ function Experiment() {
             <Form>
               <Form.Group className="mb-3">
                 <Form.Label
-                  className="mb-3 d-flex align-items-center mx-5"
+                  className="mb-3 d-flex align-items-center mx-3"
                   style={{ color: `white` }}
                 >
                   Algorithm
                 </Form.Label>
                 <Form.Control
-                  className="mb-3 d-flex align-items-center mx-5"
+                  className="mb-3 bg-gray-400 d-flex align-items-center mx-3"
                   type="text"
-                  style={{ width: "80%" }}
+                  style={{ width: "80%", backgroundColor: "#cbd5e1" }}
                   placeholder={algorithm}
                   disabled
                 />
@@ -194,15 +194,15 @@ function Experiment() {
                     <Form>
                       <Form.Group className="mb-3">
                         <Form.Label
-                          className="mb-3 d-flex align-items-center mx-5"
+                          className="mb-3 d-flex align-items-center mx-3"
                           style={{ color: `white` }}
                         >
                           {parameter.name}
                         </Form.Label>
                         <Form.Control
-                          className="mb-3 d-flex align-items-center mx-5"
+                          className="mb-3 d-flex align-items-center mx-3"
                           type="text"
-                          style={{ width: "80%" }}
+                          style={{ width: "80%", backgroundColor: "#cbd5e1" }}
                           placeholder={parameter.placeholder}
                         />
                       </Form.Group>

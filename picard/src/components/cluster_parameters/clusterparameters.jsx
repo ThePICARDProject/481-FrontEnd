@@ -18,26 +18,30 @@ const ClusterParameters = ({ onClusterParametersChange }) => {
 
   return (
     <div className="bg-[#001D3D] row-span-3 rounded-2xl overflow-auto overflow-x-hidden">
-      <p className="text-white mt-3 w-full text-xl">Cluster Parameters</p>
+      {" "}
+      <p className="text-white my-3 w-full text-xl">Cluster Parameters</p>{" "}
       {clusterParameters.map((parameter, index) => (
         <Form key={index}>
+          {" "}
           <Form.Group className="mb-3">
+            {" "}
             <Form.Label
-              className="mb-3 d-flex align-items-center mx-5"
+              className="mb-3 d-flex align-items-center mx-3"
               style={{ color: `white` }}
             >
-              {parameter.name}
-            </Form.Label>
+              {" "}
+              {parameter.name}{" "}
+            </Form.Label>{" "}
             <Form.Control
-              className="mb-3 d-flex align-items-center mx-5"
+              className="mb-3 d-flex align-items-center mx-3"
               type="text"
-              style={{ width: "80%" }}
+              style={{ width: "80%", backgroundColor: "#cbd5e1" }}
               placeholder={parameter.value}
               disabled
-            />
-          </Form.Group>
+            />{" "}
+          </Form.Group>{" "}
         </Form>
-      ))}
+      ))}{" "}
     </div>
   );
 };
