@@ -10,6 +10,7 @@ import axios from "axios";
 import Papa from "papaparse";
 import { useAuth } from "../components/authprovider/authprovider";
 import { useEffect } from "react";
+import HowToExperiment from "../components/howto/HowToExperiment";
 
 function ExperimentSetup() {
   const navigate = useNavigate();
@@ -113,6 +114,11 @@ function ExperimentSetup() {
         {/* Header section */}
         <div className="col-span-2 row-span-1">
           <Header />
+        </div>
+
+        {/* How To Component */}
+        <div className="col-span-2 row-span-1 mb-4">
+          <HowToExperiment />
         </div>
 
         {/* Algorithms Section */}

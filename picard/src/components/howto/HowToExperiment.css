@@ -1,0 +1,28 @@
+.how-to-container {
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  background-color: #f7fafc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.how-to-toggle {
+  display: inline-block;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.how-to-steps {
+  margin-top: 1rem;
+}
+
+.how-to-step h3 {
+  font-size: 1.1rem;
+  color: #2c5282;
+}
+
+.how-to-step p {
+  font-size: 0.95rem;
+  color: #4a5568;
+  margin-top: 0.25rem;
+}
