@@ -1,28 +1,51 @@
-.how-to-container {
-  border: 1px solid #e2e8f0;
-  padding: 1rem;
-  background-color: #f7fafc;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.custom-toast {
+  background-color: #ffffff !important;
+  /* Ensures it's not see-through */
+  color: #333333 !important;
+  /* Makes text darker for readability */
+  border: 1px solid #ccc !important;
+  /* Adds a subtle border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Adds a strong shadow */
 }
 
-.how-to-toggle {
-  display: inline-block;
-  font-size: 1rem;
-  cursor: pointer;
+.custom-toast .toast-header {
+  background-color: #0056b3 !important;
+  /* Header background color */
+  color: #ffffff !important;
+  /* Header text color */
+  font-size: 1.2rem;
+  /* Increases header text size */
+  font-weight: bold;
 }
 
-.how-to-steps {
-  margin-top: 1rem;
+.custom-toast .toast-body {
+  text-align: left;
+  /* Ensures text is aligned left */
+  font-size: 1.2rem;
+  /* Adjusts body text size for readability */
+  line-height: 2rem;
+  /* Improves text spacing */
 }
 
-.how-to-step h3 {
-  font-size: 1.1rem;
-  color: #2c5282;
+.custom-toast ol {
+  padding-left: 1.5rem;
+  /* Adds spacing for list indentation */
+  margin: 0;
+  list-style-type: decimal;
+  /* Ensures numbers are displayed */
 }
 
-.how-to-step p {
-  font-size: 0.95rem;
-  color: #4a5568;
-  margin-top: 0.25rem;
+.custom-toast ol li {
+  margin-bottom: 1rem;
+  /* Adds spacing below each list item */
+}
+
+.custom-toast .btn-close {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

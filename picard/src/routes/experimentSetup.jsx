@@ -116,11 +116,6 @@ function ExperimentSetup() {
           <Header />
         </div>
 
-        {/* How To Component */}
-        <div className="col-span-2 row-span-1 mb-4">
-          <HowToExperiment />
-        </div>
-
         {/* Algorithms Section */}
         <div className="col-span-1 bg-[#001D3D] row-span-4 rounded-2xl p-5 h-full mx-1 flex flex-col justify-between">
           <div>
@@ -192,8 +187,11 @@ function ExperimentSetup() {
             Proceed to Experiment Setup
           </Button>
         </div>
+
+        {/* HowToExperiment Component */}
+        <HowToExperiment />
       </div>
-    </div>
+    </div >
   );
 }
 
