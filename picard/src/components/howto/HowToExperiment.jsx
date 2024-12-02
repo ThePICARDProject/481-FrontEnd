@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Toast, Button } from "react-bootstrap";
+import "./HowToExperiment.css";
 
 const HowToExperiment = () => {
     const [show, setShow] = useState(false);
