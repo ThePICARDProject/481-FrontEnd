@@ -53,8 +53,9 @@ function ExperimentSetup() {
         console.error("Error fetching cluster parameters:", error)
       );
 
-    axios.get("http://127.0.0.1:5000/getDataset").then((res) => {
-      setDatasets(res.data.datasets);
+    axios.get("http://localhost:5080/api/dataset", {withCredentials: true}).then((res) => {
+      console.log(res)
+      setDatasets(res.data);
       setAlgorithms(res.data.algorithms);
     });
 
@@ -154,11 +155,11 @@ function ExperimentSetup() {
                       style={{ marginRight: "10px" }}
                       type="checkbox"
                       name="dataset"
-                      value={dataset}
+                      value={name}
                       checked={selectedDatasets.includes(dataset)}
                       onChange={() => handleDatasetChange(dataset)}
                     />
-                    <label>{dataset}</label>
+                    <label>{dataset.name}</label>
                   </div>
                 ))
               ) : (
