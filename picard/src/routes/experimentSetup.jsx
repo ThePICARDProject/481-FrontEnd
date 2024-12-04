@@ -53,15 +53,19 @@ function ExperimentSetup() {
         console.error("Error fetching cluster parameters:", error)
       );
 
-    axios.get("http://localhost:5080/api/dataset", {withCredentials: true}).then((res) => {
-      console.log(res)
-      setDatasets(res.data);
-      setAlgorithms(res.data.algorithms);
-    });
+    axios
+      .get("http://localhost:5080/api/dataset", { withCredentials: true })
+      .then((res) => {
+        setDatasets(res.data);
+      });
 
-    axios.get("http://127.0.0.1:5000/getParameters").then((res) => {
-      setParameterValues(res.data.parameters);
-    });
+    axios
+      .get("http://localhost:5080/api/algorithms/algorithms", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setAlgorithms(res.data);
+      });
   }, []);
 
   const handleFileChange = async (e) => {
@@ -73,7 +77,7 @@ function ExperimentSetup() {
       formData.append("file", file);
       formData.append("name", file.name);
       const res = await axios
-        .post("https://httpbin.org/post", formData, {
+        .post("http://localhost:5080/api/algorithms/upload", formData, {
           withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
@@ -129,10 +133,10 @@ function ExperimentSetup() {
                       type="radio"
                       name="algorithm"
                       value={algorithm}
-                      checked={selectedAlgorithm.includes(algorithm)}
+                      checked={selectedAlgorithm}
                       onChange={() => handleAlgorithmChange(algorithm)}
                     />
-                    <label>{algorithm}</label>
+                    <label>{algorithm.algorithmName}</label>
                   </div>
                 ))
               ) : (

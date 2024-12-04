@@ -3,7 +3,7 @@ import Header from "../components/header/header";
 import Parameter from "../components/parameter/parameter";
 import { useState } from "react";
 import FileUploader from "../components/fileuploader/fileuploader";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -36,18 +36,19 @@ const PackageEntry = ({ name, isSelected, onClick }) => (
 );
 
 function Experiment() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [clusterParameters, setClusterParameters] = useState([]);
   const [selectedDataset, setSelectedDataset] = useState(null); // Track selected dataset
   const [selectedPackage, setSelectedPackage] = useState(null); // Track selected package
   const [parameterValues, setParameterValues] = useState({}); // Track parameter values
   const [mode, setMode] = useState("datasets");
-  // const [datasets, setDatasets] = useState();
+  const [datasets, setDatasets] = useState();
   // const [packages, setPackages] = useState();
   const [additionalParameters, setAdditionalParameters] = useState([]);
   const [newParameterName, setNewParameterName] = useState("");
   const [newParameterValue, setNewParameterValue] = useState("");
   const location = useLocation();
-  const { algorithm, datasets } = location.state || {};
 
   useEffect(() => {
     fetch("../config.json")
@@ -57,14 +58,22 @@ function Experiment() {
         console.error("Error fetching cluster parameters:", error)
       );
 
-    // axios.get("http://127.0.0.1:5000/getDataset").then((res) => {
-    //   setDatasets(res.data.datasets);
-    //   setPackages(res.data.packages);
-    // });
-
-    axios.get("http://127.0.0.1:5000/getParameters").then((res) => {
-      setParameterValues(res.data.parameters);
-    });
+    axios
+      .get("http://localhost:5080/api/dataset", { withCredentials: true })
+      .then((res) => {
+        setDatasets(res.data);
+      });
+    const id = searchParams.get("experimentId");
+    axios
+      .get("http://localhost:5080/api/algorithms/algorithmParameters", {
+        withCredentials: true,
+        params: {
+          algorithmId: 2,
+        },
+      })
+      .then((res) => {
+        setParameterValues(res.data);
+      });
   }, []);
 
   // Handle parameter change
@@ -152,7 +161,7 @@ function Experiment() {
                 datasets.map((item, index) => (
                   <DatasetEntry
                     key={index}
-                    name={item}
+                    name={item.name}
                     isSelected={selectedDataset === index}
                     onClick={() => setSelectedDataset(index)}
                   />
@@ -183,7 +192,6 @@ function Experiment() {
                   className="mb-3 bg-gray-400 d-flex align-items-center mx-3"
                   type="text"
                   style={{ width: "80%", backgroundColor: "#cbd5e1" }}
-                  placeholder={algorithm}
                   disabled
                 />
               </Form.Group>
@@ -197,13 +205,13 @@ function Experiment() {
                           className="mb-3 d-flex align-items-center mx-3"
                           style={{ color: `white` }}
                         >
-                          {parameter.name}
+                          {parameter.parameterName}
                         </Form.Label>
                         <Form.Control
                           className="mb-3 d-flex align-items-center mx-3"
                           type="text"
                           style={{ width: "80%", backgroundColor: "#cbd5e1" }}
-                          placeholder={parameter.placeholder}
+                          placeholder={parameter.dataType}
                         />
                       </Form.Group>
                     </Form>
