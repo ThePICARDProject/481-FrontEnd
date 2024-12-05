@@ -49,7 +49,7 @@ function Experiment() {
   const [newParameterName, setNewParameterName] = useState("");
   const [newParameterValue, setNewParameterValue] = useState("");
   const location = useLocation();
-
+  const id = searchParams.get("experimentId");
   useEffect(() => {
     fetch("../config.json")
       .then((response) => response.json())
@@ -63,12 +63,12 @@ function Experiment() {
       .then((res) => {
         setDatasets(res.data);
       });
-    const id = searchParams.get("experimentId");
+
     axios
       .get("http://localhost:5080/api/algorithms/algorithmParameters", {
         withCredentials: true,
         params: {
-          algorithmId: 2,
+          algorithmId: id,
         },
       })
       .then((res) => {
@@ -105,7 +105,7 @@ function Experiment() {
     }, {});
 
     const jsonData = {
-      algorithmId: algorithm?.id || 0,
+      algorithmId: id || 0,
       datasetName:
         selectedDataset !== null ? datasets[selectedDataset] : "null",
       ...clusterParamsData,
@@ -119,6 +119,7 @@ function Experiment() {
 
     axios
       .post("http://localhost:5080/api/experiment/submit", jsonData, {
+        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
