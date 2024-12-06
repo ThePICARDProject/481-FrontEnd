@@ -8,6 +8,8 @@ function AlgorithmModal() {
   const [jarFile, setJarFile] = useState(null);
   const [parameters, setParameters] = useState([{ name: "", dataType: "int" }]);
   const [AlgorithmName, setAlgorithmName] = useState("");
+  const [MainClassName, setMainClassName] = useState("");
+  const [AlgType, setAlgType] = useState(0);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,8 +23,17 @@ function AlgorithmModal() {
     setParameters(newParameters);
   };
 
+  const handleTypeChange = (event) => {
+    const { value } = event.target;
+    setAlgType(Number(value));
+  };
+
   const handleAlgNameChange = (e) => {
     setAlgorithmName(e.target.value);
+  };
+
+  const handleMainNameChange = (e) => {
+    setMainClassName(e.target.value);
   };
 
   const addParameter = () =>
@@ -33,14 +44,53 @@ function AlgorithmModal() {
     setParameters(newParameters);
   };
 
-  const handleModalSubmit = () => {
+  const handleModalSubmit = async () => {
+    const formattedParameters = parameters.map((param, index) => ({
+      DataType: param.dataType,
+      DriverIndex: index,
+      ParameterName: param.name,
+    }));
+
+    // Create the algorithm data object to send
     const algorithmData = {
-      algorithmName: AlgorithmName,
-      parameters,
-      jarFileName: jarFile ? jarFile.name : null,
+      AlgorithmName: AlgorithmName,
+      MainClassName: MainClassName,
+      AlgorithmType: AlgType,
+      Parameters: JSON.stringify(formattedParameters),
     };
-    console.log(algorithmData);
-    handleClose();
+
+    // Create a FormData object to handle file upload along with JSON data
+    const formData = new FormData();
+    formData.append("AlgorithmName", AlgorithmName);
+    formData.append("MainClassName", MainClassName);
+    formData.append("AlgorithmType", AlgType.toString());
+    formData.append("Parameters", JSON.stringify(formattedParameters));
+    if (jarFile) {
+      formData.append("JarFile", jarFile);
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:5080/api/algorithms/upload",
+        {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to upload algorithm");
+      }
+
+      const responseData = await response.json();
+      console.log("Upload success:", responseData);
+
+      // Reload the page after successful submission
+      window.location.reload();
+    } catch (error) {
+      console.error("Error uploading algorithm:", error);
+    }
   };
 
   return (
@@ -71,6 +121,27 @@ function AlgorithmModal() {
                 onChange={handleAlgNameChange}
                 className="mt-3"
               />
+
+              {/* Main Class Name Input */}
+              <Form.Control
+                type="text"
+                placeholder="Main Class Name"
+                value={MainClassName}
+                onChange={handleMainNameChange}
+                className="mt-3"
+              />
+
+              {/* Algorithm Type Dropdown */}
+              <Form.Select
+                name="algorithmType"
+                value={AlgType}
+                onChange={handleTypeChange}
+                className="me-2"
+              >
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </Form.Select>
             </Form.Group>
 
             {/* Parameters Section */}

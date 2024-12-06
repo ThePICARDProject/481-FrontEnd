@@ -15,7 +15,7 @@ function ExperimentSetup() {
   const navigate = useNavigate();
   const [selectedAlgorithm, setSelectedAlgorithm] = useState([]);
   const [selectedDatasets, setSelectedDatasets] = useState([]);
-  const [file, setFile] = useState(null); // For managing file state
+  const [file, setFile] = useState(null);
   const [datasets, setDatasets] = useState();
   const [algorithms, setAlgorithms] = useState();
 
@@ -40,7 +40,7 @@ function ExperimentSetup() {
       alert("Please select at least one dataset.");
       return;
     }
-    navigate("/experiment", {
+    navigate(`/experiment?algorithmId=${selectedAlgorithm.algorithmID}`, {
       state: { algorithm: selectedAlgorithm, datasets: selectedDatasets },
     });
   };
@@ -109,6 +109,9 @@ function ExperimentSetup() {
 
         start += chunkSize;
       }
+
+      // Reload the page after dataset upload
+      window.location.reload();
     }
   };
 
@@ -127,20 +130,20 @@ function ExperimentSetup() {
             <form>
               {algorithms && algorithms.length > 0 ? (
                 algorithms.map((algorithm) => (
-                  <div key={algorithm} className="text-white">
+                  <div key={algorithm.algorithmId} className="text-white">
                     <input
                       style={{ marginRight: "10px" }}
                       type="radio"
                       name="algorithm"
-                      value={algorithm}
-                      checked={selectedAlgorithm}
+                      value={algorithm.algorithmName}
+                      checked={selectedAlgorithm === algorithm}
                       onChange={() => handleAlgorithmChange(algorithm)}
                     />
                     <label>{algorithm.algorithmName}</label>
                   </div>
                 ))
               ) : (
-                <p>No mode selected</p>
+                <p>No algorithms available</p>
               )}
             </form>
           </div>
@@ -154,20 +157,20 @@ function ExperimentSetup() {
             <form>
               {datasets && datasets.length > 0 ? (
                 datasets.map((dataset) => (
-                  <div key={dataset} className="text-white">
+                  <div key={dataset.id} className="text-white">
                     <input
                       style={{ marginRight: "10px" }}
                       type="checkbox"
                       name="dataset"
-                      value={name}
-                      checked={selectedDatasets.includes(dataset)}
-                      onChange={() => handleDatasetChange(dataset)}
+                      value={dataset.id}
+                      checked={selectedDatasets.includes(dataset.id)}
+                      onChange={() => handleDatasetChange(dataset.id)}
                     />
                     <label>{dataset.name}</label>
                   </div>
                 ))
               ) : (
-                <p>No mode selected</p>
+                <p>No datasets available</p>
               )}
             </form>
           </div>

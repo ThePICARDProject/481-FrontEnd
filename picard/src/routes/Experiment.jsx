@@ -41,15 +41,18 @@ function Experiment() {
   const [clusterParameters, setClusterParameters] = useState([]);
   const [selectedDataset, setSelectedDataset] = useState(null); // Track selected dataset
   const [selectedPackage, setSelectedPackage] = useState(null); // Track selected package
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(null); // Track selected algorithm
   const [parameterValues, setParameterValues] = useState({}); // Track parameter values
+  const [algorithmValues, setAlgorithmValues] = useState({}); // Track parameter values
   const [mode, setMode] = useState("datasets");
   const [datasets, setDatasets] = useState();
+  const [algName, setAlgName] = useState();
   // const [packages, setPackages] = useState();
   const [additionalParameters, setAdditionalParameters] = useState([]);
   const [newParameterName, setNewParameterName] = useState("");
   const [newParameterValue, setNewParameterValue] = useState("");
   const location = useLocation();
-  const id = searchParams.get("experimentId");
+  const algId = searchParams.get("algorithmId");
   useEffect(() => {
     fetch("../config.json")
       .then((response) => response.json())
@@ -68,13 +71,32 @@ function Experiment() {
       .get("http://localhost:5080/api/algorithms/algorithmParameters", {
         withCredentials: true,
         params: {
-          algorithmId: id,
+          algorithmId: algId,
         },
       })
       .then((res) => {
         setParameterValues(res.data);
       });
-  }, []);
+
+    axios
+      .get("http://localhost:5080/api/algorithms/algorithms", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setAlgorithmValues(res.data);
+
+        // Search for algorithmName right after setting algorithmValues
+        const foundAlgorithm = res.data.find(
+          (algorithm) => "" + algorithm.algorithmID === algId
+        );
+
+        const algorithmName = foundAlgorithm
+          ? foundAlgorithm.algorithmName
+          : null;
+
+        setAlgName(algorithmName);
+      });
+  }, [algId]); // Add id to the dependency array to trigger effect when it changes
 
   // Handle parameter change
   const handleParameterChange = (name, value) => {
@@ -105,13 +127,13 @@ function Experiment() {
     }, {});
 
     const jsonData = {
-      algorithmId: id || 0,
+      algorithmId: algId || 0,
       datasetName:
         selectedDataset !== null ? datasets[selectedDataset] : "null",
       ...clusterParamsData,
       parameterValues: Object.entries(parameterValues).map(([name, value]) => ({
-        parameterId: name,
-        value: value || "string",
+        parameterId: value.parameterID,
+        value: "value",
       })),
     };
 
@@ -193,11 +215,12 @@ function Experiment() {
                   className="mb-3 bg-gray-400 d-flex align-items-center mx-3"
                   type="text"
                   style={{ width: "80%", backgroundColor: "#cbd5e1" }}
+                  placeholder={algName}
                   disabled
                 />
               </Form.Group>
 
-              <div className="dataset-list">
+              <div className="param-list">
                 {parameterValues && parameterValues.length > 0 ? (
                   parameterValues.map((parameter, index) => (
                     <Form>

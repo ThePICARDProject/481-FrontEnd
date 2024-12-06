@@ -4,6 +4,7 @@ import { useAuth } from "../components/authprovider/authprovider";
 import { useNavigate, useLocation } from "react-router-dom";
 import Header from "../components/header/header";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 function Home() {
   const { setToken } = useAuth();
@@ -16,7 +17,9 @@ function Home() {
   const [lastName, setLastName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userId, setUserId] = useState("");
+  const [experiments, setExperiments] = useState([]);
 
+  // Parsing token and setting user information
   useEffect(() => {
     if (token) {
       try {
@@ -31,53 +34,48 @@ function Home() {
         setLastName(lastName);
         setUserEmail(userEmail);
         setUserId(userId);
+
+        axios
+          .get(`http://localhost:5080/api/experiment/user/getUserExperiments`, {
+            withCredentials: true,
+          })
+          .then((response) => {
+            const fetchedExperiments = response.data;
+            setExperiments(fetchedExperiments);
+            console.log("Fetched experiments:", fetchedExperiments); // Now this will log the correct data
+          })
+          .catch((error) => {
+            console.error("Error fetching experiments:", error);
+          });
       } catch (error) {
         console.error("Error parsing token:", error);
       }
     }
   }, [token]);
 
-  let experiments = [
-    {
-      name: "Boston Housing Experiment",
-      link: "/experiment?experimentId=1",
-      state: "Completed",
-    },
-    {
-      name: "ICS Power Experiment",
-      link: "/experiment?experimentId=2",
-      state: "In Progress",
-    },
-    {
-      name: "NOAA Weather Experiment",
-      link: "/experiment?experimentId=3",
-      state: "Not Started",
-    },
-    {
-      name: "Pulsar Classification Experiment",
-      link: "/experiment?experimentId=4",
-      state: "Not Started",
-    },
-  ];
-
   return (
     <>
       <Header />
-      <div className="w-screen h-screen flex justify-center items-center overflow-auto ">
+      <div className="w-screen h-screen flex justify-center items-center overflow-auto">
         <div className="w-3/4 h-3/4 max-h-screen p-4">
           <div className="mb-4">
             <h2 style={{ fontSize: "25px" }}>
               Welcome, {firstName} {lastName}!
             </h2>
           </div>
-          {experiments.map((experiment, index) => (
-            <ExperimentCard
-              key={index}
-              experimentName={experiment.name}
-              link={experiment.link}
-              experimentState={experiment.state}
-            />
-          ))}
+          {experiments.length > 0 ? (
+            experiments.map((experiment, index) => (
+              <ExperimentCard
+                key={index}
+                experimentName={experiment.experimentID}
+                link={`/experiment?algorithmId=${experiment.algorithmID}`}
+                experimentState={"Not Started"}
+              />
+              // <div> {experiment.experimentID} </div>
+            ))
+          ) : (
+            <p>No experiments found.</p>
+          )}
         </div>
       </div>
     </>

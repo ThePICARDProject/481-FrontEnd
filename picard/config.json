@@ -1,39 +1,39 @@
 {
     "cluster_parameters": [
       {
-        "name": "Node Count",
+        "name": "nodeCount",
         "type": "number",
-        "value": "100"
+        "value": 100
       },
       {
-        "name": "Driver Memory",
+        "name": "driverMemory",
         "type": "string",
         "value": "2048m"
       },
       {
-        "name": "Driver Cores",
+        "name": "driverCores",
         "type": "number",
-        "value": "1"
+        "value": 1
       },
       {
-        "name": "Executor Number",
+        "name": "executorNumber",
         "type": "number",
-        "value": "1"
+        "value": 1
       },
       {
-        "name": "Executor Cores",
+        "name": "executorCores",
         "type": "number",
-        "value": "1"
+        "value": 1
       },
       {
-        "name": "Executor Memory",
+        "name": "executorMemory",
         "type": "string",
         "value": "2048m"
       },
       {
-        "name": "Memory Overhead",
+        "name": "memoryOverhead",
         "type": "number",
-        "value": "1"
+        "value": 1
       }
     ]
   }
