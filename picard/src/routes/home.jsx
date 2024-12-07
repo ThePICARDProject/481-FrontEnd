@@ -67,7 +67,7 @@ function Home() {
             experiments.map((experiment, index) => (
               <ExperimentCard
                 key={index}
-                experimentName={experiment.experimentID}
+                experimentName={experiment.experimentName}
                 link={`/experiment?algorithmId=${experiment.algorithmID}`}
                 experimentState={"Not Started"}
               />

@@ -36,12 +36,12 @@ function ExperimentSetup() {
       alert("Please select an algorithm.");
       return;
     }
-    if (selectedDatasets.length === 0) {
-      alert("Please select at least one dataset.");
-      return;
-    }
+    // if (selectedDatasets.length === 0) {
+    //   alert("Please select at least one dataset.");
+    //   return;
+    // }
     navigate(`/experiment?algorithmId=${selectedAlgorithm.algorithmID}`, {
-      state: { algorithm: selectedAlgorithm, datasets: selectedDatasets },
+      state: { algorithm: selectedAlgorithm },
     });
   };
 
@@ -158,14 +158,6 @@ function ExperimentSetup() {
               {datasets && datasets.length > 0 ? (
                 datasets.map((dataset) => (
                   <div key={dataset.id} className="text-white">
-                    <input
-                      style={{ marginRight: "10px" }}
-                      type="checkbox"
-                      name="dataset"
-                      value={dataset.id}
-                      checked={selectedDatasets.includes(dataset.id)}
-                      onChange={() => handleDatasetChange(dataset.id)}
-                    />
                     <label>{dataset.name}</label>
                   </div>
                 ))

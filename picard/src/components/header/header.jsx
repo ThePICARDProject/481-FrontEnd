@@ -42,15 +42,21 @@ const Header = () => {
           >
             <a
               href="/home"
-              className="hover:text-blue-700"
-              style={{ fontSize: "25px" }}
+              style={{
+                fontSize: "25px",
+                fontFamily: "Tourney, sans-serif",
+                color: "#FFD60A",
+              }}
             >
               Home
             </a>
             <a
               href="/experimentSetup"
-              className="hover:text-blue-700"
-              style={{ fontSize: "25px" }}
+              style={{
+                fontSize: "25px",
+                fontFamily: "Tourney, sans-serif",
+                color: "#FFD60A",
+              }}
             >
               New Experiment
             </a>

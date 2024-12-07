@@ -1,14 +1,12 @@
 import "./Experiment.css";
 import Header from "../components/header/header";
 import Parameter from "../components/parameter/parameter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FileUploader from "../components/fileuploader/fileuploader";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, experimentalStyled } from "@mui/material";
 import ClusterParameters from "../components/cluster_parameters/clusterparameters";
-import { useEffect } from "react";
 import Jsonify from "../components/formDataUtility/jsonify.jsx";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
@@ -39,20 +37,22 @@ function Experiment() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [clusterParameters, setClusterParameters] = useState([]);
-  const [selectedDataset, setSelectedDataset] = useState(null); // Track selected dataset
-  const [selectedPackage, setSelectedPackage] = useState(null); // Track selected package
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(null); // Track selected algorithm
-  const [parameterValues, setParameterValues] = useState({}); // Track parameter values
-  const [algorithmValues, setAlgorithmValues] = useState({}); // Track parameter values
+  const [selectedDataset, setSelectedDataset] = useState(null);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(null);
+  const [parameterValues, setParameterValues] = useState([]);
+  const [parameters, setParameters] = useState([]);
+  const [algorithmValues, setAlgorithmValues] = useState([]);
   const [mode, setMode] = useState("datasets");
   const [datasets, setDatasets] = useState();
   const [algName, setAlgName] = useState();
-  // const [packages, setPackages] = useState();
+  const [experimentName, setExperimentName] = useState("");
   const [additionalParameters, setAdditionalParameters] = useState([]);
   const [newParameterName, setNewParameterName] = useState("");
   const [newParameterValue, setNewParameterValue] = useState("");
   const location = useLocation();
   const algId = searchParams.get("algorithmId");
+
   useEffect(() => {
     fetch("../config.json")
       .then((response) => response.json())
@@ -72,6 +72,7 @@ function Experiment() {
         withCredentials: true,
         params: {
           algorithmId: algId,
+          value: "",
         },
       })
       .then((res) => {
@@ -96,7 +97,7 @@ function Experiment() {
 
         setAlgName(algorithmName);
       });
-  }, [algId]); // Add id to the dependency array to trigger effect when it changes
+  }, [algId]);
 
   // Handle parameter change
   const handleParameterChange = (name, value) => {
@@ -104,6 +105,14 @@ function Experiment() {
       ...prevValues,
       [name]: value,
     }));
+  };
+
+  const handleParameterValueChange = (index, event) => {
+    const { value } = event.target;
+    const updatedParameterValues = [...parameterValues];
+    updatedParameterValues[index]["value"] = value;
+    console.log("Updated Parameter Values:", updatedParameterValues);
+    setParameterValues(updatedParameterValues);
   };
 
   const addAdditionalParameter = () => {
@@ -117,24 +126,32 @@ function Experiment() {
     }
   };
 
+  // Handle input change for experiment name
+  const handleExperimentNameChange = (e) => {
+    setExperimentName(e.target.value);
+  };
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const clusterParamsData = clusterParameters.reduce((acc, param) => {
-      acc[param.name] = param.value || null;
+    const clusterParamsData = clusterParameters.reduce((acc, param2) => {
+      acc[param2.name] = param2.value || null;
       return acc;
     }, {});
 
+    const formattedParameters2 = parameterValues.map((param2) => ({
+      parameterId: param2.parameterID,
+      value: param2.value,
+    }));
+
     const jsonData = {
       algorithmId: algId || 0,
+      experimentName: experimentName || "null",
       datasetName:
         selectedDataset !== null ? datasets[selectedDataset] : "null",
       ...clusterParamsData,
-      parameterValues: Object.entries(parameterValues).map(([name, value]) => ({
-        parameterId: value.parameterID,
-        value: "value",
-      })),
+      parameterValues: formattedParameters2,
     };
 
     console.log("Experiment Data:", JSON.stringify(jsonData, null, 2));
@@ -220,22 +237,42 @@ function Experiment() {
                 />
               </Form.Group>
 
+              <Form.Group className="mb-3">
+                <Form.Label
+                  className="mb-3 d-flex align-items-center mx-3"
+                  style={{ color: `white` }}
+                >
+                  Experiment Name
+                </Form.Label>
+                <Form.Control
+                  className="mb-3 bg-gray-400 d-flex align-items-center mx-3"
+                  type="text"
+                  style={{ width: "80%", backgroundColor: "#cbd5e1" }}
+                  value={experimentName}
+                  onChange={handleExperimentNameChange}
+                  placeholder="Enter Experiment Name"
+                />
+              </Form.Group>
+
               <div className="param-list">
                 {parameterValues && parameterValues.length > 0 ? (
-                  parameterValues.map((parameter, index) => (
-                    <Form>
+                  parameterValues.map((param2, index) => (
+                    <Form key={index}>
                       <Form.Group className="mb-3">
                         <Form.Label
                           className="mb-3 d-flex align-items-center mx-3"
                           style={{ color: `white` }}
                         >
-                          {parameter.parameterName}
+                          {param2.parameterName}
                         </Form.Label>
                         <Form.Control
                           className="mb-3 d-flex align-items-center mx-3"
                           type="text"
                           style={{ width: "80%", backgroundColor: "#cbd5e1" }}
-                          placeholder={parameter.dataType}
+                          placeholder={param2.dataType}
+                          value={param2.value}
+                          name={param2.value}
+                          onChange={(e) => handleParameterValueChange(index, e)}
                         />
                       </Form.Group>
                     </Form>
