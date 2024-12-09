@@ -10,6 +10,7 @@ import axios from "axios";
 import Papa from "papaparse";
 import { useAuth } from "../components/authprovider/authprovider";
 import { useEffect } from "react";
+import HowToExperiment from "../components/howto/HowToExperiment";
 
 function ExperimentSetup() {
   const navigate = useNavigate();
@@ -187,6 +188,8 @@ function ExperimentSetup() {
           </Button>
         </div>
       </div>
+      {/* HowToExperiment Component */}
+      <HowToExperiment />
     </div>
   );
 }

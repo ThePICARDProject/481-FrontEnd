@@ -57,7 +57,7 @@ function Home() {
     <>
       <Header />
       <div className="w-screen h-screen flex justify-center items-center overflow-auto">
-        <div className="w-3/4 h-3/4 max-h-screen p-4">
+        <div className="w-3/4 h-3/4 max-h-screen p-4 mt-10">
           <div className="mb-4">
             <h2 style={{ fontSize: "25px" }}>
               Welcome, {firstName} {lastName}!
@@ -69,7 +69,7 @@ function Home() {
                 key={index}
                 experimentName={experiment.experimentName}
                 link={`/experiment?algorithmId=${experiment.algorithmID}`}
-                experimentState={"Not Started"}
+                experimentState={experiment.status}
               />
               // <div> {experiment.experimentID} </div>
             ))
@@ -78,6 +78,7 @@ function Home() {
           )}
         </div>
       </div>
+      <div className="m-10"></div>
     </>
   );
 }

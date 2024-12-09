@@ -47,12 +47,12 @@ const Login = () => {
                 Login with Mix Account
               </button>
 
-              <button
+              {/* <button
                 className="w-full h-12 bg-[#FFD60A] rounded-md font-bold"
                 onClick={requestAccount}
               >
                 Request Access
-              </button>
+              </button> */}
             </div>
 
             <div className="row-span-1 flex items-center" />

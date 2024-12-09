@@ -165,9 +165,11 @@ function Experiment() {
       })
       .then((response) => {
         console.log("Success:", response.data);
+        window.location.href = "/home";
       })
       .catch((error) => {
         console.error("Error:", error);
+        alert("Experiment submitted unscuccessful!");
       });
   };
 

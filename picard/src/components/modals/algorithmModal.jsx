@@ -132,15 +132,16 @@ function AlgorithmModal() {
               />
 
               {/* Algorithm Type Dropdown */}
+              <label className="mt-2">Algoritm Type</label>
               <Form.Select
                 name="algorithmType"
                 value={AlgType}
                 onChange={handleTypeChange}
-                className="me-2"
+                className="me-2 mt-1"
               >
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                <option value="0">Supervised</option>
+                <option value="1">Unsupervised</option>
+                <option value="2">Semi-Supervised</option>
               </Form.Select>
             </Form.Group>
 

@@ -1,0 +1,51 @@
+.custom-toast {
+  background-color: #ffffff !important;
+  /* Ensures it's not see-through */
+  color: #333333 !important;
+  /* Makes text darker for readability */
+  border: 1px solid #ccc !important;
+  /* Adds a subtle border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Adds a strong shadow */
+}
+
+.custom-toast .toast-header {
+  background-color: #0056b3 !important;
+  /* Header background color */
+  color: #ffffff !important;
+  /* Header text color */
+  font-size: 1.2rem;
+  /* Increases header text size */
+  font-weight: bold;
+}
+
+.custom-toast .toast-body {
+  text-align: left;
+  /* Ensures text is aligned left */
+  font-size: 1.2rem;
+  /* Adjusts body text size for readability */
+  line-height: 2rem;
+  /* Improves text spacing */
+}
+
+.custom-toast ol {
+  padding-left: 1.5rem;
+  /* Adds spacing for list indentation */
+  margin: 0;
+  list-style-type: decimal;
+  /* Ensures numbers are displayed */
+}
+
+.custom-toast ol li {
+  margin-bottom: 1rem;
+  /* Adds spacing below each list item */
+}
+
+.custom-toast .btn-close {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
