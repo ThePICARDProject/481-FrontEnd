@@ -149,7 +149,7 @@ function Experiment() {
       algorithmId: algId || 0,
       experimentName: experimentName || "null",
       datasetName:
-        selectedDataset !== null ? datasets[selectedDataset] : "null",
+        selectedDataset !== null ? datasets[selectedDataset].name : "null",
       ...clusterParamsData,
       parameterValues: formattedParameters2,
     };
