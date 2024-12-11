@@ -108,6 +108,8 @@ function ExperimentSetup() {
           }
         );
 
+        console.log(formData);
+
         start += chunkSize;
       }
 

@@ -115,7 +115,7 @@ function ResultsPage() {
               <Form.Label style={{ color: "white" }}>
                 Cluster Parameter Name
               </Form.Label>
-              <Form.Control
+              {/* <Form.Control
                 type="text"
                 value={clusterParameterName}
                 onChange={(e) => setClusterParameterName(e.target.value)}
@@ -125,7 +125,24 @@ function ResultsPage() {
                   marginBottom: "10px",
                 }}
                 placeholder="Enter name"
-              />
+              /> */}
+              <Form.Select
+                value={clusterParameterName}
+                onChange={(e) => setClusterParameterName(e.target.value)}
+                style={{
+                  width: "80%",
+                  backgroundColor: "#cbd5e1",
+                  marginBottom: "10px",
+                }}
+              >
+                <option value="NodeCount">Node Count</option>
+                <option value="DriverMemory">Driver Memory</option>
+                <option value="DriverCores">Driver Cores</option>
+                <option value="ExecutorNumber">Executor Number</option>
+                <option value="ExecutorCores">Executor Cores</option>
+                <option value="ExecutorMemory">Executor Memory</option>
+                <option value="MemoryOverhead">Memory Overhead</option>
+              </Form.Select>
               <Form.Label style={{ color: "white" }}>Operator</Form.Label>
               <Form.Select
                 value={clusterOperator}
