@@ -13,6 +13,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "./components/authprovider/authprovider.jsx";
 import { Children } from "react";
 import ExperimentSetup from "./routes/experimentSetup.jsx";
+import ReultsPage from "./routes/results-page.jsx";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -60,6 +61,10 @@ const Routes = () => {
         {
           path: "/queue",
           element: <QueuePage />,
+        },
+        {
+          path: "/experiment-results",
+          element: <ReultsPage />,
         },
       ],
     },

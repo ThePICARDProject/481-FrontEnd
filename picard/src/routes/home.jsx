@@ -69,6 +69,7 @@ function Home() {
                 key={index}
                 experimentName={experiment.experimentName}
                 link={`/experiment?algorithmId=${experiment.algorithmID}`}
+                resultsLink={`/experiment-results?experimentId=${experiment.experimentID}&algorithmId=${experiment.algorithmID}`}
                 experimentState={experiment.status}
               />
               // <div> {experiment.experimentID} </div>

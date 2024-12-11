@@ -1,14 +1,19 @@
 import React from "react";
 
-const ExperimentCard = ({ experimentName, link, experimentState }) => {
+const ExperimentCard = ({
+  experimentName,
+  link,
+  resultsLink,
+  experimentState,
+}) => {
   const getExperimentState = (state) => {
     switch (state) {
       case 1:
-        return { message: "Completed", color: "text-green-500" };
+        return { message: "In Progress", color: "text-yellow-500" };
       case 2:
         return { message: "In Progress", color: "text-yellow-500" };
       case 3:
-        return { message: "Not Started", color: "text-red-500" };
+        return { message: "Completed", color: "text-green-500" };
       case 4:
         return { message: "Failed", color: "text-red-500" };
     }
@@ -31,6 +36,15 @@ const ExperimentCard = ({ experimentName, link, experimentState }) => {
         >
           View Experiment
         </a>
+
+        <a
+          href={resultsLink}
+          className="text-white no-underline flex-1 text-center"
+          style={{ fontSize: "25px" }}
+        >
+          View Results
+        </a>
+
         <div
           className={`progress-box text-lg flex-1 text-right ${color}`}
           style={{ fontSize: "25px" }}
