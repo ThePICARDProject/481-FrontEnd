@@ -3,6 +3,8 @@
 ## Table of Contents
 1. [Overview](#overview)
 2. [Quick Start](#quick-start)
+3. [How To Use Pages](#how-to-use-pages)
+4. [Troubleshooting and Common Errors](#troubleshooting-and-common-errors)
 
 ## Overview
 
@@ -23,14 +25,6 @@ The PICARD server does not have an open port for making requests. Integration sh
 2. After creating a tunnel to the ssh gateway, tunnel from the gateway to the PICARD server by executing `ssh -L 5080:localhost:5080 <username>@157.182.194.132`
 3. The tunnel should now allow server access through `https://localhost:5080/` on the front-end application.
 
-#### Trouble Shooting/Common Errors (Placeholders)
-
-1. Logging in
-2. Homepage
-3. Upload Datasets and Algorithms
-4. Experiment Setup
-5. View Results
-
 ## How To Use Pages
 
 #### Login Page
@@ -42,3 +36,11 @@ The PICARD server does not have an open port for making requests. Integration sh
 #### Experiment Setup
 
 #### View Results
+
+## Troubleshooting and Common Errors (Placeholders)
+
+1. Logging in
+2. Homepage
+3. Upload Datasets and Algorithms
+4. Experiment Setup
+5. View Results
