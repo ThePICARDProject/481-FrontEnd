@@ -37,7 +37,7 @@ The PICARD server does not have an open port for making requests. Integration sh
 
 #### View Results
 
-## Troubleshooting and Common Errors (Placeholders)
+## Troubleshooting and Common Errors
 
 1. Logging in
 2. Homepage
